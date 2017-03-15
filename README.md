@@ -1,18 +1,18 @@
 # 漫画类应用
-###&nbsp;&nbsp;个人独立开发，仿市场某竞品漫画类阅读应用
+### &nbsp;&nbsp;个人独立开发，仿市场某竞品漫画类阅读应用
 ---
 
-####作者：SLTPAYA
+#### 作者：SLTPAYA
 
-####开源协议：apache
+#### 开源协议：apache
 
-####说明：
+#### 说明：
 本开源项目中有关网络部分的MobileApi来源于原应用，MobileApi和项目图片版权归原应用所有，请勿滥用。
 若本项目侵犯了您的知识产权，请联系删除。
 
 本项目仅供学习交流使用，任何人不可作为商业使用
 
-####项目组建：
+#### 项目组建：
 
 * 网络请求部分：Retrofit2.2
 * 图片加载框架：Picasso
@@ -23,22 +23,22 @@
 * 网络抓包工具：Fiddler3
 * 图片处理工具：PixCook（像素大厨)
 
-####基于项目教程：
+#### 基于项目教程：
 
 * 将会在作者个人博客中详细讲解项目的构建
 * [Hexo个人博客](http://blog.sltpaya.com)（暂未搭建完成）
 * [简书](http://www.jianshu.com/u/397824cc2758)
 
-####项目展示：
+#### 项目展示：
 
 ![项目图片](http://p1.bpimg.com/4851/2c7b28f0b53764e5.gif)
+<img src="https://github.com/sltpaya/Cartoon/blob/master/pic01.png" width = "400" height = "800" alt="展示01"/>
+<img src="https://github.com/sltpaya/Cartoon/blob/master/pic02.png" width = "400" height = "800" alt="展示02"/>
 
-![项目图片](http://omlhtxgya.bkt.clouddn.com/pic01.png?imageView2/2/w/1400/h/800/q/100) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![项目图片](http://omlhtxgya.bkt.clouddn.com/pic02.png?imageView2/2/w/1400/h/800/q/100)
+#### 最新项目预览包：
 
-####最新项目预览包：
+[org.sltpaya.cartoon_1.6.0](https://github.com/sltpaya/Cartoon/raw/master/org.sltpaya.cartoon_1.6.apk)
 
-[org.sltpaya.cartoon_1.6.0](https://github.com/sltpaya/Cartoon/blob/master/org.sltpaya.cartoon_1.6.apk)
-
-####联系作者：
+#### 联系作者：
 
 * 邮箱：TD@SLTPAYA.COM &nbsp;&nbsp;[给我发邮件](mailto:TD@SLTPAYA.COM)

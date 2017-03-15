@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/item_title_one"/>
+
+    <include android:id="@+id/novel_group_head" layout="@layout/novel_vertical_head" />
+
+    <include android:id="@+id/novel_group_1" layout="@layout/novel_item_vertical"/>
+    <include android:id="@+id/novel_group_2" layout="@layout/novel_item_vertical"/>
+    <include android:id="@+id/novel_group_3" layout="@layout/novel_item_vertical"/>
+    <include android:id="@+id/novel_group_4" layout="@layout/novel_item_vertical"/>
+    <include android:id="@+id/novel_group_5" layout="@layout/novel_item_vertical"/>
+
+    <View
+        android:background="@drawable/bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <View
+        android:background="#f6f6f6"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+</LinearLayout>

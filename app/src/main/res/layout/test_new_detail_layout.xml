@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="95dp">
+
+        <LinearLayout
+            android:paddingLeft="15dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="16sp"
+                android:textColor="#393939"
+                android:text="粉丝团贡献榜"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="#393939"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="总战力"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/colorAccent"
+                android:text="34.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:background="#000"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+    </FrameLayout>
+
+    <View
+        android:background="#f6f6f6"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <FrameLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

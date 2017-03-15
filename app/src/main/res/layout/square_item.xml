@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/item_title_one"/>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <include android:id="@+id/square_1" layout="@layout/square_item_vertical"/>
+        <include android:id="@+id/square_2" layout="@layout/square_item_vertical"/>
+        <include android:id="@+id/square_3" layout="@layout/square_item_vertical"/>
+        <include android:id="@+id/square_4" layout="@layout/square_item_vertical"/>
+        <include android:id="@+id/square_5" layout="@layout/square_item_vertical"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="@drawable/bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <View
+        android:background="#f6f6f6"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"/>
+
+</LinearLayout>

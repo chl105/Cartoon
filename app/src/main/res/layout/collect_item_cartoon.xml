@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingBottom="5dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            app:riv_oval="false"
+            app:riv_border_width="2px"
+            app:riv_border_color="#877ee0"
+            app:riv_corner_radius="5dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/collect_item_img"
+            android:layout_width="70dp"
+            android:layout_height="90dp"
+            android:src="@drawable/icon_cover_home02" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/collect_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="困病之笼"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/collect_item_author"
+                android:textColor="#757575"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大叔酱"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/collect_item_count"
+                android:textColor="#757575"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="2.6亿人气"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/collect_item_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/collect_item_collect"
+            android:textColor="#ffc107"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_collect"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="收藏"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

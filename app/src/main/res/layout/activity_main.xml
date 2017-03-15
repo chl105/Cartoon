@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.sltpaya.cartoon.activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </FrameLayout>
+
+    <View
+        android:background="#d2d2d2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <org.sltpaya.tablayout.XTabLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_navigation"
+        app:tabIndicatorHeight="0dp"
+        app:tabBackground="@null"
+        android:background="#fefefe"
+        android:layout_width="match_parent"
+        android:layout_height="49.5dp">
+    </org.sltpaya.tablayout.XTabLayout>
+
+</LinearLayout>

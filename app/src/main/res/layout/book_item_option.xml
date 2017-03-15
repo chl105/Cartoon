@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <TextView
+        android:id="@+id/book_add_collect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_btn_bg_favor_add"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/icon_btn_bg_favor_add"
+        android:gravity="center"
+        android:text="添加收藏" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/book_shared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_btn_bg_share"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/icon_btn_bg_share"
+        android:gravity="center"
+        android:text="分享" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/book_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/props_new_icon"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/props_new_icon"
+        android:gravity="center"
+        android:text="打赏" />
+
+</LinearLayout>

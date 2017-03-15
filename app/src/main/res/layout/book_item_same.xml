@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--同类信息：下方推荐的其他作品信息-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/icon_label_flag"
+        android:textSize="14sp"
+        android:text="同类作品"
+        android:textColor="#404040"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/vertical_1"
+        layout="@layout/item_vertical_group" />
+
+    <include
+        android:id="@+id/vertical_2"
+        layout="@layout/item_vertical_group" />
+
+</LinearLayout>

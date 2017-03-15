@@ -32,8 +32,8 @@
 #### 项目展示：
 
 ![项目图片](http://p1.bpimg.com/4851/2c7b28f0b53764e5.gif)
-<img src="https://github.com/sltpaya/Cartoon/blob/master/pic01.png" width = "540" height = "960" alt="展示01"/>
-<img src="https://github.com/sltpaya/Cartoon/blob/master/pic02.png" width = "540" height = "960" alt="展示02"/>
+<img src="https://github.com/sltpaya/Cartoon/blob/master/pic01.png" width = "400" height = "800" alt="展示01"/>
+<img src="https://github.com/sltpaya/Cartoon/blob/master/pic02.png" width = "400" height = "800" alt="展示02"/>
 
 #### 最新项目预览包：
 

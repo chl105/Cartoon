@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/white"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_marginBottom="8dp"
+    android:layout_height="70dp">
 
     <TextView
+        android:id="@+id/book_detail_tag"
+        android:textSize="16sp"
         android:textColor="#000"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
@@ -14,10 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <View
-        android:layout_alignParentBottom="true"
-        android:background="#f6f6f6"
+    <GridView
+        android:layout_weight="1"
+        android:gravity="center"
+        android:numColumns="3"
+        android:id="@+id/book_detail_gridView"
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+        android:layout_height="0dp">
 
-</RelativeLayout>
+    </GridView>
+
+</LinearLayout>

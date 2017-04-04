@@ -19,14 +19,48 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
 
-    <org.sltpaya.tablayout.XTabLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/main_navigation"
-        app:tabIndicatorHeight="0dp"
-        app:tabBackground="@null"
+    <RadioGroup
+        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/radio_group"
         android:background="#fefefe"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="49.5dp">
-    </org.sltpaya.tablayout.XTabLayout>
+        android:layout_height="53dp">
+
+        <RadioButton
+            android:id="@+id/radio_cartoon"
+            android:drawableTop="@drawable/hp_selector"
+            style="@style/BottomNavigation" />
+
+        <RadioButton
+            android:id="@+id/radio_novel"
+            android:drawableTop="@drawable/bs_selector"
+            style="@style/BottomNavigation" />
+
+        <RadioButton
+            android:id="@+id/radio_collect"
+            style="@style/BottomNavigation"
+            android:drawableTop="@drawable/collect_selector" />
+
+        <RadioButton
+            android:id="@+id/radio_square"
+            android:drawableTop="@drawable/sq_selector"
+            style="@style/BottomNavigation"/>
+
+        <RadioButton
+            android:drawableTop="@drawable/mine_selector"
+            android:id="@+id/radio_mine"
+            style="@style/BottomNavigation" />
+
+    </RadioGroup>
 
 </LinearLayout>
+    <!--<org.sltpaya.tablayout.XTabLayout-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/main_navigation"-->
+        <!--app:tabIndicatorHeight="0dp"-->
+        <!--app:tabBackground="@null"-->
+        <!--android:background="#fefefe"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="49.5dp">-->
+    <!--</org.sltpaya.tablayout.XTabLayout>-->

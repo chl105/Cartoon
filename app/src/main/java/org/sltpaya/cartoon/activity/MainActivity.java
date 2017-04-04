@@ -2,9 +2,9 @@ package org.sltpaya.cartoon.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.fragment.main.CartoonFragment;
 import org.sltpaya.cartoon.fragment.main.CollectFragment;
@@ -20,7 +23,9 @@ import org.sltpaya.cartoon.fragment.main.NovelFragment;
 import org.sltpaya.cartoon.fragment.main.SquareFragment;
 import org.sltpaya.cartoon.view.ExitDialog;
 import org.sltpaya.tablayout.XTabLayout;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -38,7 +43,7 @@ public class MainActivity extends BaseActivity {
     private void init() {
         initData();
         initViews();
-        bottomNavigationEvent();
+//        bottomNavigationEvent();
     }
 
     private void initData() {
@@ -50,24 +55,67 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViews() {
-        tabLayoutInit();
+//        tabLayoutInit();
+        bottomNavigationInit();
     }
 
-    private void tabLayoutInit() {
-        mTabLayout = (XTabLayout) findViewById(R.id.main_navigation);
-        int[] resId = {
-                R.drawable.hp_selector,
-                R.drawable.bs_selector,
-                R.drawable.collect_selector,
-                R.drawable.sq_selector,
-                R.drawable.mine_selector
+//    private void tabLayoutInit() {
+//        mTabLayout = (XTabLayout) findViewById(R.id.main_navigation);
+//        int[] resId = {
+//                R.drawable.hp_selector,
+//                R.drawable.bs_selector,
+//                R.drawable.collect_selector,
+//                R.drawable.sq_selector,
+//                R.drawable.mine_selector
+//        };
+//        for (int aResId : resId) {
+//            XTabLayout.Tab tab = mTabLayout.newTab();
+//            tab.setCustomView(createTabView(aResId));
+//            mTabLayout.addTab(tab);
+//        }
+//        setDefault(0);
+//    }
+
+    /**
+     * 底部栏相关处理
+     */
+    private void bottomNavigationInit() {
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        final List<RadioButton> buttons = new ArrayList<>(5);
+        final int[] radioButtonIds = {
+                R.id.radio_cartoon,
+                R.id.radio_novel,
+                R.id.radio_collect,
+                R.id.radio_square,
+                R.id.radio_mine
         };
-        for (int aResId : resId) {
-            XTabLayout.Tab tab = mTabLayout.newTab();
-            tab.setCustomView(createTabView(aResId));
-            mTabLayout.addTab(tab);
+        for (int id : radioButtonIds) {
+            RadioButton button = (RadioButton) findViewById(id);
+            buttons.add(button);
         }
-        setDefault(0);
+        showButton(0, buttons);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                int index = 0;
+                for (int i = 0; i < radioButtonIds.length; i++) {
+                    if (radioButtonIds[i] == checkedId) {
+                        index = i;
+                    }
+                }
+                showButton(index, buttons);
+            }
+        });
+    }
+
+    private void showButton(int index, List<RadioButton> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (i != index) {
+                list.get(i).setSelected(false);
+            }
+        }
+        list.get(index).setSelected(true);
+        initFragment(index);
     }
 
     /**
@@ -95,46 +143,46 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
     }
 
-    private void bottomNavigationEvent() {
-        mTabLayout.addOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(XTabLayout.Tab tab) {
-                initFragment(tab.getPosition());
-            }
+//    private void bottomNavigationEvent() {
+//        mTabLayout.addOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(XTabLayout.Tab tab) {
+//                initFragment(tab.getPosition());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(XTabLayout.Tab tab) {
+//            }
+//
+//            @Override
+//            public void onTabReselected(XTabLayout.Tab tab) {
+//            }
+//        });
+//    }
 
-            @Override
-            public void onTabUnselected(XTabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(XTabLayout.Tab tab) {
-            }
-        });
-    }
-
-    private void setDefault(int defaultIndex) {
-        int count = mTabLayout.getTabCount();
-        for (int i = 0; i < count; i++) {
-            XTabLayout.Tab tab = mTabLayout.getTabAt(i);
-            if (tab != null && i == defaultIndex) {
-                tab.select();
-            }
-        }
-        initFragment(0);
-    }
-
-    private View createTabView(int resId) {
-        LayoutInflater inflater = getLayoutInflater();
-        LinearLayout layout = new LinearLayout(this);
-        View view = inflater.inflate(R.layout.item_bottom, layout, false);
-        ImageView img = (ImageView) view.findViewById(R.id.bottom_tab);
-        img.setImageResource(resId);
-        return view;
-    }
+//    private void setDefault(int defaultIndex) {
+//        int count = mTabLayout.getTabCount();
+//        for (int i = 0; i < count; i++) {
+//            XTabLayout.Tab tab = mTabLayout.getTabAt(i);
+//            if (tab != null && i == defaultIndex) {
+//                tab.select();
+//            }
+//        }
+//        initFragment(0);
+//    }
+//
+//    private View createTabView(int resId) {
+//        LayoutInflater inflater = getLayoutInflater();
+//        LinearLayout layout = new LinearLayout(this);
+//        View view = inflater.inflate(R.layout.item_bottom, layout, false);
+//        ImageView img = (ImageView) view.findViewById(R.id.bottom_tab);
+//        img.setImageResource(resId);
+//        return view;
+//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
+        //super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -173,4 +221,10 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());//结束掉进程，释放空间
+    }
 }

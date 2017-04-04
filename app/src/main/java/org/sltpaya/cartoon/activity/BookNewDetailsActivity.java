@@ -84,44 +84,44 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
      * 作者专区和评论
      */
     private void initIndicator() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.indicator);
-        tabLayout.addTab(tabLayout.newTab().setText("作者专区"), true);
-        tabLayout.addTab(tabLayout.newTab().setText("评论"), false);
-
-        final AuthorFragment authorFragment = new AuthorFragment();
-        final CommentFragment commentFragment = new CommentFragment();
-
-        //添加Fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.indicator_container, authorFragment);
-        transaction.add(R.id.indicator_container, commentFragment);
-        transaction.commit();
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (position == 0) {
-                    System.out.println("切换到了AuthorFragment");
-                    transaction.hide(commentFragment);
-                    transaction.show(authorFragment);
-                } else if (position == 1) {
-                    System.out.println("切换到了CommentFragment!");
-                    transaction.hide(authorFragment);
-                    transaction.show(commentFragment);
-                }
-                transaction.commit();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.indicator);
+//        tabLayout.addTab(tabLayout.newTab().setText("作者专区"), true);
+//        tabLayout.addTab(tabLayout.newTab().setText("评论"), false);
+//
+//        final AuthorFragment authorFragment = new AuthorFragment();
+//        final CommentFragment commentFragment = new CommentFragment();
+//
+//        //添加Fragment
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.indicator_container, authorFragment);
+//        transaction.add(R.id.indicator_container, commentFragment);
+//        transaction.commit();
+//
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                int position = tab.getPosition();
+//                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                if (position == 0) {
+//                    System.out.println("切换到了AuthorFragment");
+//                    transaction.hide(commentFragment);
+//                    transaction.show(authorFragment);
+//                } else if (position == 1) {
+//                    System.out.println("切换到了CommentFragment!");
+//                    transaction.hide(authorFragment);
+//                    transaction.show(commentFragment);
+//                }
+//                transaction.commit();
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//            }
+//        });
     }
 
     /**

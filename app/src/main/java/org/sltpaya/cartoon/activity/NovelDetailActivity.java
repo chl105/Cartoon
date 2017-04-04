@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import org.sltpaya.cartoon.R;
 
-public class NovelDetailActivity extends AppCompatActivity {
+public class NovelDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

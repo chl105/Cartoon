@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.activity.BookNewDetailsActivity;
 import org.sltpaya.cartoon.activity.StripManDetailActivity;
-
-import static android.R.attr.data;
 
 /**
  * Author: SLTPAYA
@@ -23,6 +21,21 @@ public abstract class BaseTabFragment extends Fragment {
 
     protected View mRootView;
     protected RecyclerView mRecyclerView;
+    /**Fragment依附的Activity*/
+    protected Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        System.out.println("fragment执行了onAttach");
+        mContext = context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        System.out.println("fragment执行了onDetach");
+    }
 
     @Nullable
     @Override

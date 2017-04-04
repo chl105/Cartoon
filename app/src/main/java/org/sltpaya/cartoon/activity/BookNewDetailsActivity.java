@@ -1,21 +1,21 @@
 package org.sltpaya.cartoon.activity;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextPaint;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import org.sltpaya.cartoon.R;
+import org.sltpaya.cartoon.adapter.DataUtils;
 import org.sltpaya.cartoon.fragment.detail.AuthorFragment;
 import org.sltpaya.cartoon.fragment.detail.CommentFragment;
 import org.sltpaya.cartoon.holder.detail.SameBookHolder;
@@ -28,13 +28,11 @@ import org.sltpaya.cartoon.net.entry.detail.BookDetailEntry;
 import org.sltpaya.cartoon.net.entry.detail.DetailSameEntry;
 import org.sltpaya.tool.Toast;
 
-import static android.media.CamcorderProfile.get;
-
 /**
  * Author: SLTPAYA
  * Date: 2017/3/4
  */
-public class BookNewDetailsActivity extends FragmentActivity implements NetCache.DataSuccessful {
+public class BookNewDetailsActivity extends BaseActivity implements NetCache.DataSuccessful {
 
     private TextView mStartRead;
     private TextView mUpdate;
@@ -42,7 +40,7 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
     private TextView mAuthor;
     private TextView mBookName;
     private TextView mDes;
-    private TextView mGrade;
+    private TextView mBookScore;
 
     private ImageView mBookImg;
     private ImageView mAdImage;
@@ -77,7 +75,7 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
         buttonCollect = findViewById(R.id.book_add_collect);
         buttonShared = findViewById(R.id.book_shared);
         buttonMoney = findViewById(R.id.book_money);
-        mGrade = (TextView) findViewById(R.id.book_grade);
+        mBookScore = (TextView) findViewById(R.id.book_grade);
         mAdImage = (ImageView) findViewById(R.id.book_ad);
         initIndicator();
     }
@@ -95,8 +93,8 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
 
         //添加Fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.indicator_container,authorFragment);
-        transaction.add(R.id.indicator_container,commentFragment);
+        transaction.add(R.id.indicator_container, authorFragment);
+        transaction.add(R.id.indicator_container, commentFragment);
         transaction.commit();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -108,7 +106,7 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
                     System.out.println("切换到了AuthorFragment");
                     transaction.hide(commentFragment);
                     transaction.show(authorFragment);
-                }else if (position == 1){
+                } else if (position == 1) {
                     System.out.println("切换到了CommentFragment!");
                     transaction.hide(authorFragment);
                     transaction.show(commentFragment);
@@ -124,6 +122,51 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+    /**
+     * 处理小说信息
+     *
+     * @param entry BookDetailEntry
+     */
+    private void handleBookData(BookDetailEntry entry) {
+        BookDetailEntry.Data data = entry.getData();
+
+        String imgUrl = data.getThumb();
+        String strTitle = data.getTitle();
+        String strAuthor = "作者：" + data.getAuthor();
+        String strDes = data.getDescription();
+        String strCore = data.getAverageScore();
+        String strGxType = data.getGxType();
+        String strUpdateTime = data.getUpdatetime();
+        String strHit = data.getHitNum();//点击数量
+        String strViews = data.getViews();//人气数量
+
+        int gxType = DataUtils.parseInt(strGxType, 0);
+        float book_score = DataUtils.parseFloat(strCore, 0.0F);
+        book_score = ((int) ((book_score + 0.05F) * 10)) / 10.0f;
+        long updateTime = DataUtils.parseLong(strUpdateTime, System.currentTimeMillis()) * 1000;
+
+        String hitNum = DataUtils.parseDataNum(strHit, 0);
+        String bookViews = DataUtils.parseDataNum(strViews, 0);
+        String strUpdate = DataUtils.getBookFrequency(gxType) + "  " +
+                DataUtils.getUpdateFormatDate(updateTime);
+        String strFans = "点击：" + hitNum + "   人气：" + bookViews;
+        System.out.println("更新时间："+updateTime+"处理过的："+strUpdate+"当前系统："+System.currentTimeMillis());
+        System.out.println(strFans);
+
+        TextPaint paint = mAuthor.getPaint();
+        paint.setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        paint.setAntiAlias(true);
+        mAuthor.setText(strAuthor);//作者名是可以点击的，带有下划线，可点击的超链接
+
+        mBookName.setText(strTitle);//作品名
+        mDes.setText(strDes);//作品简介，只显示两行，超过的行自动隐藏
+        mBookScore.setText(String.valueOf(book_score));//作品分数
+        mUpdate.setText(strUpdate);
+        mFans.setText(strFans);
+
+        Picasso.with(this).load(imgUrl).into(mBookImg);
     }
 
     /**
@@ -147,6 +190,7 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
 
     /**
      * 处理详情页广告图
+     *
      * @param entry BookDetailAdEntry
      */
     private void handleDetailAd(BookDetailAdEntry entry) {
@@ -174,37 +218,14 @@ public class BookNewDetailsActivity extends FragmentActivity implements NetCache
                 String viewType = (String) info.get(0);
                 String bookId = (String) info.get(1);
                 if ("1".equals(viewType)) {
-                    System.out.println("进入条漫Activity"+bookId);
+                    System.out.println("进入条漫Activity" + bookId);
                     entryStripManDetail(bookId);
-                }else {
-                    System.out.println("进入漫画详情页了！"+bookId);
+                } else {
+                    System.out.println("进入漫画详情页了！" + bookId);
                     entryBookNewDetails(bookId);
                 }
             }
         });
-    }
-
-    /**
-     * 处理小说信息
-     *
-     * @param entry BookDetailEntry
-     */
-    private void handleBookData(BookDetailEntry entry) {
-        BookDetailEntry.Data data = entry.getData();
-        String imgUrl = data.getThumb();
-        String title = data.getTitle();
-        String author = "作者：" + data.getAuthor();
-        String description = data.getDescription();
-        String score = data.getAverageScore();
-        float book_score = Float.parseFloat(score);
-        book_score = ((int) ((book_score + 0.05F) * 10)) / 10.0f;
-
-        mAuthor.setText(author);
-        mBookName.setText(title);
-        mDes.setText(description);
-        mGrade.setText(String.valueOf(book_score));
-
-        Picasso.with(this).load(imgUrl).into(mBookImg);
     }
 
 

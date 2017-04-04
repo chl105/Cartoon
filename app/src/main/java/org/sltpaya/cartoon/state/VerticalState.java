@@ -15,10 +15,9 @@ public class VerticalState extends BaseState {
     public void work(HolderManger manger) {
         super.work(manger);
         if (mType == VERTICAL_TYPE) {
-            View infalte = infalte(R.layout.novel_group_three);
-            VerticalHolder holder = new VerticalHolder(infalte);
+            View inflate = infalte(R.layout.novel_group_three);
+            VerticalHolder holder = new VerticalHolder(inflate);
             manger.setHolder(holder);
-            return;
         }
     }
 

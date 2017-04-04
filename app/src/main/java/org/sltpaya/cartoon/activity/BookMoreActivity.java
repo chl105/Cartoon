@@ -20,7 +20,7 @@ import org.sltpaya.cartoon.net.observer.NetListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookMoreActivity extends AppCompatActivity {
+public class BookMoreActivity extends BaseActivity {
 
     private String[] mModuleInfo;//所显示的类型，可能是cartoon或者novel两个模块的最新
     private MoreItemAdapter adapter;

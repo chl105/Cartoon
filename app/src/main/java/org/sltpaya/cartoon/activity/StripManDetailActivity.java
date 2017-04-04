@@ -1,18 +1,16 @@
 package org.sltpaya.cartoon.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.widget.TextView;
-
 import org.sltpaya.cartoon.R;
 
 /**
  * Author: SLTPAYA
  * Date: 2017/3/4
  */
-public class StripManDetailActivity extends Activity {
+public class StripManDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

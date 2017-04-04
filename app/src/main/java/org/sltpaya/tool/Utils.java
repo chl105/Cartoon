@@ -5,6 +5,7 @@
 
 package org.sltpaya.tool;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -473,7 +475,9 @@ public class Utils {
      */
     public static class ToolApplication extends Application {
 
+        private static final String TAG = "ToolApplication";
         static Context[] mContexts = new Context[1];
+        List<Activity> activities = new ArrayList<>();
 
         public static Context getContext() {
             return mContexts[0];
@@ -483,6 +487,27 @@ public class Utils {
         public void onCreate() {
             super.onCreate();
             mContexts[0] = getApplicationContext();
+        }
+
+        public void addActivity(Activity activity) {
+            boolean b = activities.contains(activity);
+            if (!b) {
+                activities.add(activity);
+            }
+        }
+
+        public void removeActivity(Activity activity) {
+            activities.remove(activity);
+            activity.finish();
+        }
+
+        public void clearActivity() {
+            for (Activity activity : activities) {
+                Log.i(TAG, "activity销毁："+activity);
+                if (activity != null) {
+                    activity.finish();
+                }
+            }
         }
 
     }

@@ -26,6 +26,8 @@ import static android.R.attr.handle;
 public class VerticalHolder extends BaseHolder {
 
     private ArrayList<View> mViews;
+    /**根布局标签，通过控制其显示和隐藏*/
+    ArrayList<View> mRootViews;
 
     public VerticalHolder(View itemView) {
         super(itemView);
@@ -35,7 +37,10 @@ public class VerticalHolder extends BaseHolder {
     private void initViews() {
         initGroupTitle();
         mViews = new ArrayList<>();
+        mRootViews = new ArrayList<>(6);
         View head = itemView.findViewById(R.id.novel_group_head);
+        head.setVisibility(View.GONE);
+        mRootViews.add(head);
         mViews.add(0, head);
         int[] ids = {
                 R.id.novel_group_1,
@@ -46,6 +51,8 @@ public class VerticalHolder extends BaseHolder {
         };
         for (int id : ids) {
             View view = itemView.findViewById(id);
+            view.setVisibility(View.GONE);
+            mRootViews.add(view);
             mViews.add(view);
         }
     }
@@ -56,11 +63,12 @@ public class VerticalHolder extends BaseHolder {
     private void initGroupTitle() {
         TextView groupTitle = (TextView) itemView.findViewById(R.id.title_one_title);
         ImageView groupIcon = (ImageView) itemView.findViewById(R.id.title_one_img);
-        View view = itemView.findViewById(R.id.title_one_more);
+        TextView groupMore = (TextView) itemView.findViewById(R.id.title_one_more);
+        groupMore.setText("更多");
 
         groupTitle.setText("刚刚更新O(∩_∩)O~~");
         groupIcon.setImageResource(R.drawable.icon_new_update);
-        view.setOnClickListener(new View.OnClickListener() {
+        groupMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(),"将要加载更多数据啦啦啦....",Toast.LENGTH_LONG)
@@ -75,6 +83,8 @@ public class VerticalHolder extends BaseHolder {
         if (cache.getData() != null) {
             UpdateEntry entry = (UpdateEntry) cache.getData().get(18);
             List<UpdateEntry.Datum> data = entry.getData().getData();
+            /*让根View显示出来*/
+            setVisibility(mRootViews, View.VISIBLE);
             setData(data);
         }
     }

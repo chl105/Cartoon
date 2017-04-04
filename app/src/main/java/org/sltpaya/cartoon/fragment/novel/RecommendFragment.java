@@ -32,7 +32,7 @@ public class RecommendFragment extends BaseTabFragment {
                 String tos = "小说获取数据成功了！！" + data.toString();
                 System.out.println(tos);
                 Toast.makeText(getContext(), tos, Toast.LENGTH_LONG).show();
-                adapter.notifyDataChange();//通过数据成功获取到了，要求设置数据并且改变
+                adapter.notifyDataChanged(true);//通过数据成功获取到了，要求设置数据并且改变
             }
         };
         NovelCache.newInstance().setDataListener(dataSuccessful);

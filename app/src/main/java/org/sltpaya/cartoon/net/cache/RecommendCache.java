@@ -131,7 +131,7 @@ public class RecommendCache extends NetCache {
 //        String action = params.get("a");
 //        int type = Integer.parseInt(params.get("type"));
 //        handlerError(action, type);
-        logger("网络失败！,正在重试！");
+//        logger("网络失败！,正在重试！");
     }
 
     private void logger(String des) {

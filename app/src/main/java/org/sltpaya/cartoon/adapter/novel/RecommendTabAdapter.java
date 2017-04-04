@@ -4,23 +4,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import org.sltpaya.cartoon.adapter.BaseRecyclerAdapter;
 import org.sltpaya.cartoon.holder.BaseHolder;
 import org.sltpaya.cartoon.holder.novel.BannerHolder;
 import org.sltpaya.cartoon.state.BaseState;
 import org.sltpaya.cartoon.state.HolderManger;
 
+import static android.R.string.no;
+
 /**
  * Author: SLTPAYA
  * Date: 2017/2/26
  */
-public class RecommendTabAdapter extends RecyclerView.Adapter {
+public class RecommendTabAdapter extends BaseRecyclerAdapter {
 
-    private boolean dataChanged = false;
     private BannerHolder mBannerHolder;
 
-    public void notifyDataChange() {
-        dataChanged = true;
-        notifyDataSetChanged();
+    @Override
+    public void notifyDataChanged(boolean successful) {
+        super.notifyDataChanged(successful);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class RecommendTabAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (dataChanged) {
+        if (mSuccessful) {
             ((BaseHolder) holder).updateView();
         }
     }

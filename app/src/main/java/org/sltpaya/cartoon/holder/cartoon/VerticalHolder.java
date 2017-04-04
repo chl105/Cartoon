@@ -25,11 +25,13 @@ import java.util.List;
 public class VerticalHolder extends BaseHolder implements View.OnClickListener{
 
     private ArrayList<View> mItems;
+    /**根布局标签，通过控制其显示和隐藏*/
+    private ArrayList<View> mRootViews;
     private TextView mGroupTitle;
     private ImageView mGroupIcon;
     private TypeTwoEntry mEntry;
     private AdapterItemListener<BookState> listener;
-    private View moreView;
+    private TextView moreView;
     private int layoutType;
 
     public VerticalHolder(View itemView) {
@@ -39,13 +41,16 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
 
     private void initViews() {
         mItems = new ArrayList<>();
+        mRootViews = new ArrayList<>(2);
         initGroupTitle();
-        int[] parents = {
+        int[] parentsId = {
                 R.id.vertical_1,
                 R.id.vertical_2
         };
-        for (int id : parents) {
+        for (int id : parentsId) {
             View view = itemView.findViewById(id);
+            view.setVisibility(View.GONE);
+            mRootViews.add(view);
             inflateGroup(view);
         }
     }
@@ -64,12 +69,12 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
     }
 
     private void inflateGroup(View view) {
-        int[] parents = {
+        int[] parentsId = {
                 R.id.item_vertical_1,
                 R.id.item_vertical_2,
                 R.id.item_vertical_3
         };
-        for (int id : parents) {
+        for (int id : parentsId) {
             View child = view.findViewById(id);
             mItems.add(child);
         }
@@ -82,6 +87,8 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
         RecommendCache cache = RecommendCache.newInstance();
         SparseArray<Entry> cacheData = cache.getData();
         if (cacheData != null) {
+            /*让根View显示出来*/
+            setVisibility(mRootViews, View.VISIBLE);
             getEntry(cacheData);
             setData();
         }
@@ -121,7 +128,7 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
 
         parent.setTag(-1, state);
 
-        //更多Activit布局，设置moreView的监听事件
+        //更多Activity布局，设置moreView的监听事件
         //0为标题名，1位类型（more),2为type的id
         moreView.setOnClickListener(this);
         BookState moreState = new BookState(bookid);
@@ -160,7 +167,8 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
         mGroupTitle.setText(titles[index]);
         mGroupIcon.setImageResource(redId[index]);
 
-        moreView = itemView.findViewById(R.id.title_one_more);
+        moreView = (TextView) itemView.findViewById(R.id.title_one_more);
+        moreView.setText("更多");
     }
 
     @Override

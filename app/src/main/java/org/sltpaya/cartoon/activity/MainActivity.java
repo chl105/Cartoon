@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,7 @@ import org.sltpaya.cartoon.view.ExitDialog;
 import org.sltpaya.tablayout.XTabLayout;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private XTabLayout mTabLayout;
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -157,6 +158,19 @@ public class MainActivity extends AppCompatActivity {
             dialogWindow.setAttributes(attributes);
         }
         dialog.show();
+        dialog.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setPositiveButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                clearActivity();
+            }
+        });
     }
 
 }

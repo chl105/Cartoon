@@ -28,10 +28,11 @@ public class HorizontalOneHolder extends BaseHolder {
 
     ImageView groupIcon;
     TextView groupTitle;
-    View groupMore;
+    TextView groupMore;
 
     private ArrayList<View> mItems;
-    private int mVisible = View.GONE;
+    /**根布局标签，通过控制其显示和隐藏*/
+    ArrayList<View> mRootViews;
     private HorizontalOneEntry mEntry;
 
     public HorizontalOneHolder(View itemView) {
@@ -41,19 +42,17 @@ public class HorizontalOneHolder extends BaseHolder {
         initGroupTitle();
     }
 
-    protected void setDesVisible(int visible) {
-        mVisible = visible;
-    }
-
     protected void initViews() {
-        setDesVisible(View.VISIBLE);
-        int[] ids = {
+        mRootViews = new ArrayList<>(3);
+        int[] parentIds = {
                 R.id.novel_group_1,
                 R.id.novel_group_2,
                 R.id.novel_group_3
         };
-        for (int id : ids) {
+        for (int id : parentIds) {
             View view = itemView.findViewById(id);
+            view.setVisibility(View.GONE);
+            mRootViews.add(view);
             findGroupItem(view);
         }
     }
@@ -64,7 +63,8 @@ public class HorizontalOneHolder extends BaseHolder {
     private void initGroupTitle() {
         groupTitle = (TextView) itemView.findViewById(R.id.title_one_title);
         groupIcon = (ImageView) itemView.findViewById(R.id.title_one_img);
-        groupMore = itemView.findViewById(R.id.title_one_more);
+        groupMore = (TextView) itemView.findViewById(R.id.title_one_more);
+        groupMore.setText("更多");
     }
 
     protected void findGroupItem(View view) {
@@ -84,6 +84,8 @@ public class HorizontalOneHolder extends BaseHolder {
         if (cache.getData() != null) {
             getEntry(cache.getData());
             List<HorizontalOneEntry.Datum> data = mEntry.getData().getData();
+            /*让根View显示出来*/
+            setVisibility(mRootViews, View.VISIBLE);
             setData(data);
             setGroup();
         }
@@ -143,7 +145,6 @@ public class HorizontalOneHolder extends BaseHolder {
         ImageView flagImg = (ImageView) view.findViewById(R.id.novel_item_flag);
         TextView title = (TextView) view.findViewById(R.id.novel_item_title);
         TextView des = (TextView) view.findViewById(R.id.novel_item_des);
-        des.setVisibility(mVisible);
 
         String description = datum.getDescription();
         String imgUrl = datum.getThumb();

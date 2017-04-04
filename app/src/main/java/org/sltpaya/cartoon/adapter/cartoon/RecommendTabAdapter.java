@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import org.sltpaya.cartoon.BookState;
 import org.sltpaya.cartoon.R;
+import org.sltpaya.cartoon.adapter.BaseRecyclerAdapter;
 import org.sltpaya.cartoon.holder.BannerHolder;
 import org.sltpaya.cartoon.holder.BaseHolder;
 import org.sltpaya.cartoon.holder.cartoon.AdHolder;
@@ -22,7 +23,7 @@ import org.sltpaya.cartoon.listener.AdapterItemListener;
  * Author: SLTPAYA
  * Date: 2017/2/21
  */
-public class RecommendTabAdapter extends RecyclerView.Adapter<BaseHolder> {
+public class RecommendTabAdapter extends BaseRecyclerAdapter<BaseHolder> {
 
     //所有的布局类型
     private final int BANNER_TYPE = 1;
@@ -31,16 +32,13 @@ public class RecommendTabAdapter extends RecyclerView.Adapter<BaseHolder> {
     private final int VERTICAL_TYPE = 4;
     private final int AD_TYPE = 5;
     private final int AD_TWO_TYPE = 6;
-    private boolean mSuccessful = false;
     private AdapterItemListener<BookState> listener;
     private ViewGroup mParent;
     private BannerHolder mBannerHolder;
 
+    @Override
     public void notifyDataChanged(boolean successful) {
-        mSuccessful = successful;
-        if (successful) {
-            notifyDataSetChanged();
-        }
+        super.notifyDataChanged(successful);
     }
 
     public void setClickListener(AdapterItemListener<BookState> listener) {
@@ -127,4 +125,5 @@ public class RecommendTabAdapter extends RecyclerView.Adapter<BaseHolder> {
             mBannerHolder.stopScroll();
         }
     }
+
 }

@@ -1,22 +1,17 @@
 package org.sltpaya.cartoon.fragment.cartoon;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
-
 import org.sltpaya.cartoon.BookState;
-import org.sltpaya.cartoon.activity.BookMoreActivity;
 import org.sltpaya.cartoon.activity.EntryUtils;
 import org.sltpaya.cartoon.adapter.cartoon.RecommendTabAdapter;
 import org.sltpaya.cartoon.fragment.BaseTabFragment;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.Entry;
-import org.sltpaya.cartoon.net.entry.more.CartoonMoreEntry;
 import org.sltpaya.tool.Toast;
-
-import static android.media.CamcorderProfile.get;
 
 /**
  * Author: SLTPAYA
@@ -24,7 +19,14 @@ import static android.media.CamcorderProfile.get;
  */
 public class RecommendFragment extends BaseTabFragment {
 
+    private static final String TAG = "RecommendFragment";
+
     private RecommendTabAdapter adapter;
+
+    @Override
+    protected void initViews() {
+        dataChanged();
+    }
 
     @Override
     protected void setRecyclerView() {
@@ -52,25 +54,23 @@ public class RecommendFragment extends BaseTabFragment {
         RecommendCache cache = RecommendCache.newInstance();
         if (cache.getData() == null) {
             cache.requestNet();
-        }else {
-            Toast.makeText(getContext(),"存在数据，正在通知！", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(mContext, "漫画-推荐数据存在!", Toast.LENGTH_SHORT).show();
             cache.notifyData();
         }
     }
 
-    @Override
-    protected void initViews() {
-        dataChanged();
-    }
-
-    //下拉刷新处理数据，传入True就可以通知数据改变了！
+    /**
+     * 下拉刷新处理数据，传入True就可以通知数据改变了！
+     */
     private void dataChanged() {
         RecommendCache.DataSuccessful dataSuccessful = new RecommendCache.DataSuccessful() {
             @Override
             public void onResponse(SparseArray<Entry> data) {
-                String tos = "漫画获取数据成功了！！" + data.toString();
-                System.out.println(tos);
-                Toast.makeText(getContext(), tos, Toast.LENGTH_LONG).show();
+                String toast = "联网请求漫画-推荐 数据全部获取成功！" + data.toString();
+                Log.i(TAG, toast);
+                Log.i(TAG, "onResponse: 正在通知适配器传递数据！");
+                Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
                 adapter.notifyDataChanged(true);//通过数据成功获取到了，要求设置数据并且改变
             }
         };

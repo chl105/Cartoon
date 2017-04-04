@@ -26,7 +26,7 @@ import java.util.Map;
  * 2017-3-13
  * 小说模块--排行--土豪榜
  */
-public class RednecksRankActivity extends AppCompatActivity implements NetListener{
+public class RednecksRankActivity extends BaseActivity implements NetListener{
 
     private ActivityItem mActivityItem;
     private RednecksAdapter adapter;

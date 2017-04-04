@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:background="#f3f3f3"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    tools:showIn="@layout/activity_book_new_detail">
+
+    <com.makeramen.roundedimageview.RoundedImageView android:layout_gravity="center_horizontal"
+        android:id="@+id/book_ad"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:src="@drawable/icon_cover_home03"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="7dp"
+        android:layout_width="336dp"
+        android:layout_height="92dp" />
+
+</FrameLayout>

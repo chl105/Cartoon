@@ -1,6 +1,5 @@
 package org.sltpaya.cartoon.holder;
 
-import android.os.SystemClock;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.BannerAdapter;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
@@ -17,25 +15,22 @@ import org.sltpaya.cartoon.net.entry.Entry;
 
 import java.util.List;
 
-import static org.sltpaya.tool.Utils.runOnUiThread;
-
 /**
  * Author: SLTPAYA
  * Date: 2017/2/21
  */
 public class BannerHolder extends BaseHolder {
 
+    protected ViewPager mBanner;
+    protected int pagerCount;
     private View selectedDot;
     private ViewGroup dotSet;
-    protected ViewPager mBanner;
     private Thread mTimingThread;
-
     private int dotWidth;
     private int dotRightMargin;
-    protected int pagerCount;
-
     private boolean isScrolling = false;
     private boolean allowScroll = true;
+    private boolean exit = false;
 
     public BannerHolder(View itemView) {
         super(itemView);
@@ -54,9 +49,11 @@ public class BannerHolder extends BaseHolder {
     public void updateView() {
         RecommendCache cache = RecommendCache.newInstance();
         SparseArray<Entry> data = cache.getData();
-        BannerEntry entry = (BannerEntry) data.get(0);
-        setBannerData(entry);
-        createDotView();
+        if (data != null) {
+            BannerEntry entry = (BannerEntry) data.get(0);
+            setBannerData(entry);
+            createDotView();
+        }
     }
 
     public void stopScroll() {
@@ -103,24 +100,23 @@ public class BannerHolder extends BaseHolder {
      * 轮播图自动滑动
      */
     protected void timingRoll() {
-        mTimingThread = new Thread() {
-            @Override
-            public void run() {
-                while (!isScrolling && allowScroll) {
-                    SystemClock.sleep(5000);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            int index = mBanner.getCurrentItem() + 1;
-                            System.out.println("更改了一次！" + index);
-                            mBanner.setCurrentItem(index);
-                        }
-                    });
-
-                }
-            }
-        };
-        mTimingThread.start();
+//        mTimingThread = new Thread() {
+//            @Override
+//            public void run() {
+//                while (!isScrolling && allowScroll) {
+//                    SystemClock.sleep(5000);
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            int index = mBanner.getCurrentItem() + 1;
+//                            System.out.println("更改了一次！" + index);
+//                            mBanner.setCurrentItem(index);
+//                        }
+//                    });
+//                }
+//            }
+//        };
+//        mTimingThread.start();
     }
 
     /**
@@ -137,6 +133,7 @@ public class BannerHolder extends BaseHolder {
                 RelativeLayout.LayoutParams params
                         = (RelativeLayout.LayoutParams) selectedDot.getLayoutParams();
                 position %= pagerCount;
+                positionOffset = 0;/*整点移动，不再显示移动轨迹*/
                 int max = (dotWidth + dotRightMargin) * (pagerCount - 1);
                 int tmp = (int) ((dotWidth + dotRightMargin) * (position + positionOffset) + 0.5);
                 if (tmp > max) tmp = 0;

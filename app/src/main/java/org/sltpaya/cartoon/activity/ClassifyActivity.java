@@ -11,7 +11,7 @@ import org.sltpaya.cartoon.ActivityItem;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.pager.ClassifyPagerAdapter;
 
-public class ClassifyActivity extends AppCompatActivity {
+public class ClassifyActivity extends BaseActivity {
 
     private ActivityItem mRankItem;
 

@@ -3,6 +3,7 @@ package org.sltpaya.cartoon.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,7 +13,9 @@ import org.sltpaya.cartoon.net.cache.RecommendCache;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
+
+    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,8 @@ public class SplashActivity extends AppCompatActivity {
     private void enterActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        Log.i(TAG, "activity销毁：闪屏页移除了activity");
+        removeActivity();
     }
 
     /**

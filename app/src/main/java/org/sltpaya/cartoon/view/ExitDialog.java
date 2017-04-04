@@ -77,7 +77,6 @@ public class ExitDialog extends Dialog implements View.OnClickListener {
             if (id == R.id.dialog_true) {
                 this.dismiss();
                 SystemClock.sleep(200);
-                System.exit(0);
             }else {
                 this.dismiss();
             }

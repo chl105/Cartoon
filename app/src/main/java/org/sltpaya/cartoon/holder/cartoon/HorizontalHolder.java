@@ -30,9 +30,11 @@ import static android.os.Build.VERSION_CODES.M;
 public class HorizontalHolder extends BaseHolder implements View.OnClickListener{
 
     private ArrayList<View> mItems;
+    /**根布局标签，通过控制其显示和隐藏*/
+    private ArrayList<View> mRootViews;
     private TypeOneEntry mEntry;
     private AdapterItemListener<BookState> listener;
-    private View moreView;
+    private TextView moreView;
     private int layoutType;
     private TextView groupTitle;
 
@@ -43,14 +45,17 @@ public class HorizontalHolder extends BaseHolder implements View.OnClickListener
 
     private void initViews() {
         mItems = new ArrayList<>();
+        mRootViews = new ArrayList<>(3);
         initGroupTitle();
-        int[] parents = {
+        int[] parentsId = {
                 R.id.horizontal_1,
                 R.id.horizontal_2,
                 R.id.horizontal_3
         };
-        for (int id : parents) {
+        for (int id : parentsId) {
             View view = itemView.findViewById(id);
+            view.setVisibility(View.GONE);
+            mRootViews.add(view);
             inflateGroup(view);
         }
     }
@@ -70,7 +75,8 @@ public class HorizontalHolder extends BaseHolder implements View.OnClickListener
     private void initGroupTitle() {
         groupTitle = (TextView) itemView.findViewById(R.id.title_one_title);
         ImageView groupIcon = (ImageView) itemView.findViewById(R.id.title_one_img);
-        moreView = itemView.findViewById(R.id.title_one_more);
+        moreView = (TextView) itemView.findViewById(R.id.title_one_more);
+        moreView.setText("更多");
 
         groupTitle.setText("精挑细选Y(^o^)Y");
         groupIcon.setImageResource(R.drawable.icon_recommend_new);
@@ -92,6 +98,8 @@ public class HorizontalHolder extends BaseHolder implements View.OnClickListener
         RecommendCache cache = RecommendCache.newInstance();
         SparseArray<Entry> cacheData = cache.getData();
         if (cacheData != null) {
+            /*让根View显示出来*/
+            setVisibility(mRootViews, View.VISIBLE);
             mEntry = (TypeOneEntry) cacheData.get(1);
             setData();
         }

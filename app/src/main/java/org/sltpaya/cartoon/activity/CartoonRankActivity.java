@@ -19,7 +19,7 @@ import java.util.HashMap;
  * 人气，点击榜，少年榜，少女，耽美
  *
  */
-public class CartoonRankActivity extends AppCompatActivity {
+public class CartoonRankActivity extends BaseActivity {
 
     private ActivityItem mRankLabel;
 

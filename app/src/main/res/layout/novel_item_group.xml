@@ -9,8 +9,7 @@
     <include android:id="@+id/novel_1" layout="@layout/novel_item_horizontal"/>
 
     <Space
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="10dp"
         android:layout_height="match_parent" />
 
     <include android:id="@+id/novel_2" layout="@layout/novel_item_horizontal"/>

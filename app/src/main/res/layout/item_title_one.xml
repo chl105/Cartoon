@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginStart="25dp"
-            android:text="这本漫画真厉害，一周人气"
             android:textSize="14sp" />
 
         <Space
@@ -34,7 +33,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
-            android:text="更多"
             android:textColor="#ffc107" />
 
     </LinearLayout>

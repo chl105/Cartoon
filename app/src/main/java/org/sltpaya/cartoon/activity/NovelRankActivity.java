@@ -14,7 +14,7 @@ import org.sltpaya.cartoon.adapter.pager.RankItemAdapter;
 /**
  * NovelRankActivity，是Novel模块中排行Activity
  */
-public class NovelRankActivity extends AppCompatActivity {
+public class NovelRankActivity extends BaseActivity {
 
     private ActivityItem mActivityItem;
 

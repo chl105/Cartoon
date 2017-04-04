@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.holder;
 
+import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -10,7 +11,12 @@ import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.tool.Toast;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+
 import static android.R.attr.level;
+import static android.R.attr.visibility;
 
 /**
  * Author: SLTPAYA
@@ -33,6 +39,18 @@ public abstract class BaseHolder extends RecyclerView.ViewHolder {
      * @param listener {@link AdapterItemListener}
      */
     public void setListener(AdapterItemListener<BookState> listener) {}
+
+    /**
+     * 设置集合中View的显示属性
+     * @param views View
+     * @param visibility {@link View}
+     */
+    public void setVisibility(ArrayList<View> views, int visibility) {
+        for (View view : views) {
+            view.setVisibility(visibility);
+        }
+    }
+
 
     /**
      * 为作品设置更新类型

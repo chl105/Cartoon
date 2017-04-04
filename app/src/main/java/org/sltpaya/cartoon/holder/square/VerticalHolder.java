@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class VerticalHolder extends BaseHolder{
 
     protected ArrayList<View> views;
-    protected View groupMore;
+    protected TextView groupMore;
     protected ImageView groupIcon;
     protected TextView groupTitle;
 
@@ -59,7 +59,8 @@ public class VerticalHolder extends BaseHolder{
     private void initGroupTitle() {
         groupTitle = (TextView) itemView.findViewById(R.id.title_one_title);
         groupIcon = (ImageView) itemView.findViewById(R.id.title_one_img);
-        groupMore = itemView.findViewById(R.id.title_one_more);
+        groupMore = (TextView) itemView.findViewById(R.id.title_one_more);
+        groupMore.setText("更多");
     }
 
 }

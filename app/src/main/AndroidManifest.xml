@@ -13,22 +13,22 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup,android:supportsRtl,android:label,android:icon">
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.StripManDetailActivity" />
-        <activity android:name=".activity.BookNewDetailsActivity" />
-        <activity android:name=".activity.CartoonRankActivity" />
-        <activity android:name=".activity.BookMoreActivity" />
-        <activity android:name=".activity.ClassifyActivity" />
-        <activity android:name=".activity.NovelRankActivity" />
-        <activity android:name=".activity.NovelDetailActivity" />
-        <activity android:name=".activity.RednecksRankActivity"></activity>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.StripManDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BookNewDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CartoonRankActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BookMoreActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ClassifyActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.NovelRankActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.NovelDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RednecksRankActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

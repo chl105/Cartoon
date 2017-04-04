@@ -14,7 +14,7 @@ import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.cartoon.net.entry.TypeTwoEntry;
-import org.sltpaya.tool.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +84,7 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
     @Override
     public void updateView() {
         setGroupTop();
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         SparseArray<Entry> cacheData = cache.getData();
         if (cacheData != null) {
             /*让根View显示出来*/

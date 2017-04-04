@@ -1,11 +1,8 @@
 package org.sltpaya.cartoon.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import org.sltpaya.cartoon.R;
@@ -47,7 +44,7 @@ public class SplashActivity extends BaseActivity {
      * 为了给用户更好的体验，在这里，将会在闪屏页开始异步请求推荐页面数据.
      */
     private void requestNet() {
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         if (cache.getData() == null) {
             cache.requestNet();
         }

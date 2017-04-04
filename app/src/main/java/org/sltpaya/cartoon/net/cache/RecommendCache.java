@@ -32,7 +32,7 @@ public class RecommendCache extends NetCache {
     private RecommendCache() {
     }
 
-    public static RecommendCache newInstance() {
+    public static RecommendCache getInstance() {
         if (recommendCache == null) {
             synchronized (RecommendCache.class) {
                 if (recommendCache == null) {

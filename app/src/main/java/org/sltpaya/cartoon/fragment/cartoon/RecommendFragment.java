@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.fragment.cartoon;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.util.SparseArray;
@@ -8,7 +9,9 @@ import org.sltpaya.cartoon.BookState;
 import org.sltpaya.cartoon.activity.EntryUtils;
 import org.sltpaya.cartoon.adapter.cartoon.RecommendTabAdapter;
 import org.sltpaya.cartoon.fragment.BaseTabFragment;
+import org.sltpaya.cartoon.fragment.RefreshTabFragment;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
+import org.sltpaya.cartoon.net.cache.NetCache;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.tool.Toast;
@@ -17,10 +20,9 @@ import org.sltpaya.tool.Toast;
  * Author: SLTPAYA
  * Date: 2017/2/21
  */
-public class RecommendFragment extends BaseTabFragment {
+public class RecommendFragment extends RefreshTabFragment {
 
     private static final String TAG = "RecommendFragment";
-
     private RecommendTabAdapter adapter;
 
     @Override
@@ -37,6 +39,23 @@ public class RecommendFragment extends BaseTabFragment {
         requestNet();
     }
 
+    @Override
+    protected void setRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (System.currentTimeMillis() - lastRefreshTime > dataEffective) {
+                    System.out.println("执行到了这个方法中！");
+                    RecommendCache.getInstance().requestNet();
+                } else {
+                    mRefreshLayout.setRefreshing(false);
+                    Toast.makeText(mContext, "已经是最新数据了！", Toast.LENGTH_SHORT).show();
+                }
+                lastRefreshTime = System.currentTimeMillis();
+            }
+        });
+    }
+
     private void clickEvent() {
         adapter.setClickListener(new AdapterItemListener<BookState>() {
             @Override
@@ -50,31 +69,26 @@ public class RecommendFragment extends BaseTabFragment {
     }
 
     private void requestNet() {
-        //请求网络数据
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         if (cache.getData() == null) {
-            cache.requestNet();
+            cache.requestNet();//请求网络数据
         } else {
-            Toast.makeText(mContext, "漫画-推荐数据存在!", Toast.LENGTH_SHORT).show();
-            cache.notifyData();
+            cache.notifyData();//使用缓存数据
         }
     }
 
     /**
-     * 下拉刷新处理数据，传入True就可以通知数据改变了！
+     * 下拉刷新处理数据，调用cache.requestNet()就可以通知数据改变了！
      */
     private void dataChanged() {
-        RecommendCache.DataSuccessful dataSuccessful = new RecommendCache.DataSuccessful() {
+        RecommendCache.getInstance().setDataListener(new NetCache.DataSuccessful() {
             @Override
             public void onResponse(SparseArray<Entry> data) {
-                String toast = "联网请求漫画-推荐 数据全部获取成功！" + data.toString();
-                Log.i(TAG, toast);
-                Log.i(TAG, "onResponse: 正在通知适配器传递数据！");
-                Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
-                adapter.notifyDataChanged(true);//通过数据成功获取到了，要求设置数据并且改变
+                Toast.makeText(mContext, "联网请求！",Toast.LENGTH_SHORT).show();
+                mRefreshLayout.setRefreshing(false);
+                adapter.notifyDataChanged(true);
             }
-        };
-        RecommendCache.newInstance().setDataListener(dataSuccessful);
+        });
     }
 
 }

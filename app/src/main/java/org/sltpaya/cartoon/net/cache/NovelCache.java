@@ -33,7 +33,7 @@ public class NovelCache extends NetCache {
      *
      * @return NovelCache
      */
-    public static NovelCache newInstance() {
+    public static NovelCache getInstance() {
         if (novelCache == null) {
             synchronized (NovelCache.class) {
                 if (novelCache == null) {

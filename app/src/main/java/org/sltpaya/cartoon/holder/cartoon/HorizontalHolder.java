@@ -15,13 +15,9 @@ import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.cartoon.net.entry.TypeOneEntry;
-import org.sltpaya.tool.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Author: SLTPAYA
@@ -95,7 +91,7 @@ public class HorizontalHolder extends BaseHolder implements View.OnClickListener
 
     @Override
     public void updateView() {
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         SparseArray<Entry> cacheData = cache.getData();
         if (cacheData != null) {
             /*让根View显示出来*/

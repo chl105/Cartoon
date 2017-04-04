@@ -80,7 +80,7 @@ public class HorizontalOneHolder extends BaseHolder {
 
     @Override
     public void updateView() {
-        NovelCache cache = NovelCache.newInstance();
+        NovelCache cache = NovelCache.getInstance();
         if (cache.getData() != null) {
             getEntry(cache.getData());
             List<HorizontalOneEntry.Datum> data = mEntry.getData().getData();

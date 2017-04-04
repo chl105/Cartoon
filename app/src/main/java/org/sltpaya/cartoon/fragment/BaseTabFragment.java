@@ -2,9 +2,11 @@ package org.sltpaya.cartoon.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +52,7 @@ public abstract class BaseTabFragment extends Fragment {
 
     protected abstract void setRecyclerView();
 
-    protected void initViews() {
-
-    }
+    protected void initViews() {}
 
     protected void entryStripManDetail(String bookid) {
         Intent intent = new Intent(getContext(), StripManDetailActivity.class);

@@ -21,12 +21,6 @@ public class NovelFragment extends NovelCartFragment {
     protected void setPagerAdapter() {
         String[] titles = {"日更", "推荐", "分类", "排行"};
         mPager.setAdapter(new CartoonPagerAdapter(getChildFragmentManager(), titles, getFragments()));
-        requestNet();
-    }
-
-    private void requestNet() {
-        NovelCache cache = NovelCache.newInstance();
-        cache.requestNet();
     }
 
     /**

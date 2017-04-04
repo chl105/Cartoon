@@ -16,7 +16,7 @@ public class BannerHolder extends org.sltpaya.cartoon.holder.BannerHolder {
 
     @Override
     public void updateView() {
-        NovelCache cache = NovelCache.newInstance();
+        NovelCache cache = NovelCache.getInstance();
         if (cache.getData() != null) {
             BannerEntry entry = (BannerEntry) cache.getData().get(0);
             setBannerData(entry);

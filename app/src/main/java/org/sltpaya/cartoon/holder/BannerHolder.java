@@ -47,7 +47,7 @@ public class BannerHolder extends BaseHolder {
 
     @Override
     public void updateView() {
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         SparseArray<Entry> data = cache.getData();
         if (data != null) {
             BannerEntry entry = (BannerEntry) data.get(0);

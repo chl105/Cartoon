@@ -34,7 +34,7 @@ public class AdTwoHolder extends BaseHolder {
 
     @Override
     public void updateView() {
-        RecommendCache cache = RecommendCache.newInstance();
+        RecommendCache cache = RecommendCache.getInstance();
         SparseArray<Entry> data = cache.getData();
         mEntry = (AdEntry) data.get(RECOMMEND_AD_TYPE);
         if (mEntry != null) {

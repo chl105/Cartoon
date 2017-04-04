@@ -9,15 +9,12 @@ import com.squareup.picasso.Picasso;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.holder.BaseHolder;
 import org.sltpaya.cartoon.net.cache.NovelCache;
-import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.cartoon.net.entry.novel.UpdateEntry;
 import org.sltpaya.tool.Toast;
 import org.sltpaya.tool.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.handle;
 
 /**
  * Author: SLTPAYA
@@ -79,7 +76,7 @@ public class VerticalHolder extends BaseHolder {
 
     @Override
     public void updateView() {
-        NovelCache cache = NovelCache.newInstance();
+        NovelCache cache = NovelCache.getInstance();
         if (cache.getData() != null) {
             UpdateEntry entry = (UpdateEntry) cache.getData().get(18);
             List<UpdateEntry.Datum> data = entry.getData().getData();

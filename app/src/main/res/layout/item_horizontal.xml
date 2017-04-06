@@ -14,10 +14,12 @@
         android:layout_weight="1">
 
         <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginEnd="3dp"
             android:id="@+id/item_horizontal_img"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="2dp"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_cover_home01"
             app:riv_border_color="#877ee0"

@@ -3,6 +3,7 @@ package org.sltpaya.cartoon.activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -29,7 +30,6 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    private XTabLayout mTabLayout;
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private ArrayList<Fragment> alreadyAddFragments = new ArrayList<>();
 
@@ -43,7 +43,6 @@ public class MainActivity extends BaseActivity {
     private void init() {
         initData();
         initViews();
-//        bottomNavigationEvent();
     }
 
     private void initData() {
@@ -55,26 +54,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViews() {
-//        tabLayoutInit();
         bottomNavigationInit();
     }
-
-//    private void tabLayoutInit() {
-//        mTabLayout = (XTabLayout) findViewById(R.id.main_navigation);
-//        int[] resId = {
-//                R.drawable.hp_selector,
-//                R.drawable.bs_selector,
-//                R.drawable.collect_selector,
-//                R.drawable.sq_selector,
-//                R.drawable.mine_selector
-//        };
-//        for (int aResId : resId) {
-//            XTabLayout.Tab tab = mTabLayout.newTab();
-//            tab.setCustomView(createTabView(aResId));
-//            mTabLayout.addTab(tab);
-//        }
-//        setDefault(0);
-//    }
 
     /**
      * 底部栏相关处理
@@ -142,43 +123,6 @@ public class MainActivity extends BaseActivity {
 
         transaction.commit();
     }
-
-//    private void bottomNavigationEvent() {
-//        mTabLayout.addOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(XTabLayout.Tab tab) {
-//                initFragment(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(XTabLayout.Tab tab) {
-//            }
-//
-//            @Override
-//            public void onTabReselected(XTabLayout.Tab tab) {
-//            }
-//        });
-//    }
-
-//    private void setDefault(int defaultIndex) {
-//        int count = mTabLayout.getTabCount();
-//        for (int i = 0; i < count; i++) {
-//            XTabLayout.Tab tab = mTabLayout.getTabAt(i);
-//            if (tab != null && i == defaultIndex) {
-//                tab.select();
-//            }
-//        }
-//        initFragment(0);
-//    }
-//
-//    private View createTabView(int resId) {
-//        LayoutInflater inflater = getLayoutInflater();
-//        LinearLayout layout = new LinearLayout(this);
-//        View view = inflater.inflate(R.layout.item_bottom, layout, false);
-//        ImageView img = (ImageView) view.findViewById(R.id.bottom_tab);
-//        img.setImageResource(resId);
-//        return view;
-//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

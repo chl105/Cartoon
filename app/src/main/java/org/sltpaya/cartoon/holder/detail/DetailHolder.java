@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.holder.detail;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -94,7 +95,6 @@ public class DetailHolder extends BaseHolder {
         mUserName.setText(username);
         mUpdateTime.setText(updateTime);
         Picasso.with(itemView.getContext()).load(headImgUrl).into(mUserHead);
-
     }
 
 }

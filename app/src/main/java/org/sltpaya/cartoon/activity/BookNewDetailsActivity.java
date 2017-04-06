@@ -4,20 +4,18 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.DataUtils;
-import org.sltpaya.cartoon.fragment.detail.AuthorFragment;
-import org.sltpaya.cartoon.fragment.detail.CommentFragment;
 import org.sltpaya.cartoon.holder.detail.SameBookHolder;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.cartoon.net.cache.BookDetailCache;
@@ -39,7 +37,7 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     private TextView mFans;
     private TextView mAuthor;
     private TextView mBookName;
-    private TextView mDes;
+    private TextView mBookDes;
     private TextView mBookScore;
 
     private ImageView mBookImg;
@@ -51,6 +49,10 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     private View buttonMoney;
 
     private String mParamsBookid;
+    /**
+     * 作品简介显示或隐藏
+     */
+    private boolean isShowText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,21 +66,64 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     }
 
     private void initViews() {
+        //作品信息（作品名，作者，更新时间）
         mBookImg = (ImageView) findViewById(R.id.book_img);
         mBookName = (TextView) findViewById(R.id.book_name);
         mAuthor = (TextView) findViewById(R.id.book_author);
         mFans = (TextView) findViewById(R.id.book_fans);
         mUpdate = (TextView) findViewById(R.id.book_update_info);
-        mStartRead = (TextView) findViewById(R.id.book_start_read);
-        mDes = (TextView) findViewById(R.id.book_des);
+        mBookScore = (TextView) findViewById(R.id.book_grade);
+        mBookDes = (TextView) findViewById(R.id.book_des);
         mBack = findViewById(R.id.back_activity);
+        mStartRead = (TextView) findViewById(R.id.book_start_read);
+        //收藏，分享，打赏按钮
         buttonCollect = findViewById(R.id.book_add_collect);
         buttonShared = findViewById(R.id.book_shared);
         buttonMoney = findViewById(R.id.book_money);
-        mBookScore = (TextView) findViewById(R.id.book_grade);
+        //广告图
         mAdImage = (ImageView) findViewById(R.id.book_ad);
+
         initIndicator();
+        //作品简介多余部分的隐藏
+        handleExpandText();
     }
+
+    private void handleExpandText() {
+        //多余文字是否隐藏
+        View mExpandText = findViewById(R.id.expand_text);
+        isShowText = false;
+        mExpandText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShowText = !isShowText;
+                if (mBookDes.getLineCount() > 2) {
+                    if (isShowText) {
+                        ((ImageView) v).setImageResource(R.drawable.icon_collapse);
+                    } else {
+                        ((ImageView) v).setImageResource(R.drawable.icon_expand);
+                    }
+                } else {
+                    ((ImageView) v).setImageResource(0);
+                }
+                showExpandText(mBookDes, isShowText);
+            }
+        });
+    }
+
+    /**
+     * 展开小说简介
+     */
+    private void showExpandText(TextView view, boolean isShow) {
+        int lineCount = view.getLineCount();
+        if (isShow) {
+            view.setSingleLine(false);
+            view.setEllipsize(null);
+        } else if (lineCount > 2) {
+            view.setLines(2);
+            view.setEllipsize(TextUtils.TruncateAt.END);
+        }
+    }
+
 
     /**
      * 作者专区和评论
@@ -152,8 +197,6 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
         String strUpdate = DataUtils.getBookFrequency(gxType) + "  " +
                 DataUtils.getUpdateFormatDate(updateTime);
         String strFans = "点击：" + hitNum + "   人气：" + bookViews;
-        System.out.println("更新时间："+updateTime+"处理过的："+strUpdate+"当前系统："+System.currentTimeMillis());
-        System.out.println(strFans);
 
         TextPaint paint = mAuthor.getPaint();
         paint.setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
@@ -161,7 +204,7 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
         mAuthor.setText(strAuthor);//作者名是可以点击的，带有下划线，可点击的超链接
 
         mBookName.setText(strTitle);//作品名
-        mDes.setText(strDes);//作品简介，只显示两行，超过的行自动隐藏
+        mBookDes.setText(strDes);//作品简介，只显示两行，超过的行自动隐藏
         mBookScore.setText(String.valueOf(book_score));//作品分数
         mUpdate.setText(strUpdate);
         mFans.setText(strFans);
@@ -229,10 +272,10 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     }
 
 
+    /**
+     * 收藏，分享，打赏按钮点击事件，以及本页面所有控件点击事件的处理
+     */
     private void setListenerEvent() {
-        /*
-         * 小说详情页所有的按钮点击事件监听器
-         */
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

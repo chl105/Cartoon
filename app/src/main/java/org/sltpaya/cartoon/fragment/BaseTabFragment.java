@@ -39,6 +39,12 @@ public abstract class BaseTabFragment extends Fragment {
         System.out.println("fragment执行了onDetach");
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println("Fragment View被销毁了！！！");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

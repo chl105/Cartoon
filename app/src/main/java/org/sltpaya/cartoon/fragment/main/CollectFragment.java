@@ -11,6 +11,7 @@ import org.sltpaya.cartoon.adapter.pager.TestPagerAdapter;
 import org.sltpaya.cartoon.fragment.collect.*;
 import org.sltpaya.cartoon.fragment.collect.CartoonFragment;
 import org.sltpaya.cartoon.fragment.collect.NovelFragment;
+import org.sltpaya.tablayout.XTabLayout;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class CollectFragment extends NovelCartFragment {
     @Override
     protected void inflateAppBar(ViewGroup appbarContainer) {
         View inflate = getLayoutInflater().inflate(R.layout.bar_collect, appbarContainer, true);
-        mTabLayout = (TabLayout) inflate.findViewById(R.id.top_navigation);
+        mTabLayout = (XTabLayout) inflate.findViewById(R.id.top_navigation);
     }
 
     @Override

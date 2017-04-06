@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import org.sltpaya.cartoon.R;
+import org.sltpaya.tablayout.XTabLayout;
 
 /**
  * Author: SLTPAYA
@@ -13,13 +14,13 @@ import org.sltpaya.cartoon.R;
  */
 public abstract class NovelCartFragment extends BaseFragment {
 
-    protected TabLayout mTabLayout;
+    protected XTabLayout mTabLayout;
     protected ViewPager mPager;
 
     @Override
     protected void inflateAppBar(ViewGroup appbarContainer) {
         View inflate = getLayoutInflater().inflate(R.layout.bar_tab, appbarContainer, true);
-        mTabLayout = (TabLayout) inflate.findViewById(R.id.top_navigation);
+        mTabLayout = (XTabLayout) inflate.findViewById(R.id.top_navigation);
     }
 
     @Override

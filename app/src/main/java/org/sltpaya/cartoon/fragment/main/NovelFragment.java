@@ -8,6 +8,7 @@ import org.sltpaya.cartoon.fragment.novel.RankTabFragment;
 import org.sltpaya.cartoon.fragment.novel.RecommendFragment;
 import org.sltpaya.cartoon.fragment.novel.UpdateDayFragment;
 import org.sltpaya.cartoon.net.cache.NovelCache;
+import org.sltpaya.tablayout.XTabLayout;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class NovelFragment extends NovelCartFragment {
      */
     @Override
     protected void setDefault() {
-        TabLayout.Tab tab = mTabLayout.getTabAt(1);
+        XTabLayout.Tab tab = mTabLayout.getTabAt(1);
         if (tab != null) tab.select();
     }
 

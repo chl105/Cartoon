@@ -26,15 +26,33 @@
             <include layout="@layout/book_item_option" />
 
             <!--小说简介-->
-            <TextView
+            <LinearLayout
                 android:background="@color/white"
-                android:id="@+id/book_des"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="20dp"
-                android:paddingStart="10dp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:background="@color/white"
+                    android:id="@+id/book_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingStart="10dp" />
+
+                <ImageView
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:id="@+id/expand_text"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <!--章节列表-->
             <GridView

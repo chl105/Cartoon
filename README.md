@@ -37,7 +37,7 @@
 
 #### 最新项目预览包：
 
-[org.sltpaya.cartoon_1.6.0](https://github.com/sltpaya/Cartoon/raw/master/org.sltpaya.cartoon_1.6.apk)
+[org.sltpaya.cartoon_1.7.0](https://github.com/sltpaya/Cartoon/raw/NewDesign/org.sltpaya.cartoon_1.7.apk)
 
 #### 联系作者：
 

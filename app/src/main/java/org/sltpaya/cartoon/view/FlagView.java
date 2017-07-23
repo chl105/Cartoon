@@ -47,7 +47,6 @@ public class FlagView extends TextView {
         strokeWidth = 2;
         mPaint.setStrokeWidth(strokeWidth);
         mPaint.setAntiAlias(true);
-
         rectF = new RectF();
         mPath = new Path();
 
@@ -67,6 +66,12 @@ public class FlagView extends TextView {
 
     public void setRadui(int radui) {
         mRadui = radui;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        System.out.println("获取到了view的宽度为"+getMeasuredWidth());
     }
 
     @Override

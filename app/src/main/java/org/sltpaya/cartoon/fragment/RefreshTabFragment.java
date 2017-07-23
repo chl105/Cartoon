@@ -22,7 +22,7 @@ public abstract class RefreshTabFragment extends BaseTabFragment {
     protected SwipeRefreshLayout mRefreshLayout;
     /* 上一次下拉刷新的值 */
     protected long lastRefreshTime = 0;
-    /**数据有效性时间，为60秒*/
+    /*数据有效性时间，为60秒*/
     protected long dataEffective = 60000;
 
     @Nullable
@@ -38,7 +38,7 @@ public abstract class RefreshTabFragment extends BaseTabFragment {
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setColorSchemeColors(0xff33b5e5, 0xff99cc00, 0xffff4444, 0xff0099cc);
+        mRefreshLayout.setColorSchemeColors(0xffffc107);
         mRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
         setRefreshLayout();
     }

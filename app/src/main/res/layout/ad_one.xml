@@ -5,21 +5,21 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:paddingBottom="15dp">
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/ad_top"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
                 android:paddingTop="2dp"
                 android:text="专题"
                 android:textColor="#feeefe"
-                android:textSize="20px" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/ad_title"
@@ -41,32 +41,31 @@
                 android:layout_marginStart="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="情人节大作战"
                 android:textColor="#6c6c6c"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ad_img"
-            app:riv_corner_radius="7dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/icon_cover_home01" />
+            android:layout_height="124dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_cover_home03"
+            app:riv_corner_radius="7dp" />
 
     </LinearLayout>
 
     <View
-        android:background="@drawable/bottom_shadow"
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="3dp"
+        android:background="@drawable/bottom_shadow" />
+
     <View
-        android:background="#f6f6f6"
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+        android:layout_height="8dp"
+        android:background="#f6f6f6" />
 
 </LinearLayout>

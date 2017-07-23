@@ -1,22 +1,15 @@
 package org.sltpaya.cartoon.holder;
 
-import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import org.sltpaya.cartoon.BookState;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
-import org.sltpaya.tool.Toast;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-
-import static android.R.attr.level;
-import static android.R.attr.visibility;
 
 /**
  * Author: SLTPAYA
@@ -24,25 +17,32 @@ import static android.R.attr.visibility;
  */
 public abstract class BaseHolder extends RecyclerView.ViewHolder {
 
+    protected LayoutInflater mInflater;
+
     public BaseHolder(View itemView) {
         super(itemView);
+        mInflater = LayoutInflater.from(itemView.getContext());
     }
 
     /**
      * updateView方法用于更新视图
      * 只有true才会设置数据
      */
-    public void updateView() {}
+    public void updateView() {
+    }
 
     /**
      * 从外传入点击事件的监听器
+     *
      * @param listener {@link AdapterItemListener}
      */
-    public void setListener(AdapterItemListener<BookState> listener) {}
+    public void setListener(AdapterItemListener<BookState> listener) {
+    }
 
     /**
      * 设置集合中View的显示属性
-     * @param views View
+     *
+     * @param views      View
      * @param visibility {@link View}
      */
     public void setVisibility(ArrayList<View> views, int visibility) {
@@ -54,7 +54,8 @@ public abstract class BaseHolder extends RecyclerView.ViewHolder {
 
     /**
      * 为作品设置更新类型
-     * @param view 设置的ImgeView
+     *
+     * @param view   设置的ImgeView
      * @param typeId 更新类型id，由服务器提供
      */
     protected void setUpdateType(ImageView view, int typeId) {
@@ -120,7 +121,9 @@ public abstract class BaseHolder extends RecyclerView.ViewHolder {
                 R.drawable.level_nineteen,
                 R.drawable.level_twenty
         };
-        mUserLevel.setImageResource(levels[level]);
+        if (level < levels.length) {
+            mUserLevel.setImageResource(levels[level]);
+        }
     }
 
 }

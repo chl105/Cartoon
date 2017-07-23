@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.holder.novel;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class UpdateDayHolder extends BaseHolder {
             Picasso.with(itemView.getContext()).load(imgUrl)
                     .placeholder(R.drawable.icon_cover_home03)
                     .error(R.drawable.icon_cover_home03)
+                    .config(Bitmap.Config.RGB_565)
                     .into(mImg);
         }
     }

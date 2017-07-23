@@ -45,6 +45,13 @@ public abstract class NetCache implements NetListener {
         }
     }
 
+//    /**
+//     * 供子类重写方法
+//     */
+//    protected void requestOther() {
+//
+//    }
+
     protected abstract HashMap<String, String> getParams(String action, int type);
 
     /**

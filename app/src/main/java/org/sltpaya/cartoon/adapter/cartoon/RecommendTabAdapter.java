@@ -65,7 +65,7 @@ public class RecommendTabAdapter extends BaseRecyclerAdapter<BaseHolder> {
                 holder = new PreviewHolder(inflate);
                 break;
             case HORIZONTAL_TYPE:
-                inflate = inflateView(R.layout.cartoon_group_one);
+                inflate = inflateView(R.layout.cartoon_group);
                 holder = new HorizontalHolder(inflate);
                 break;
             case AD_TYPE:
@@ -77,7 +77,7 @@ public class RecommendTabAdapter extends BaseRecyclerAdapter<BaseHolder> {
                 holder = new AdTwoHolder(inflate);
                 break;
             default://默认为竖直页面
-                inflate = inflateView(R.layout.cartoon_group_two);
+                inflate = inflateView(R.layout.cartoon_group);
                 holder = new VerticalHolder(inflate);
                 break;
         }

@@ -1,65 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:orientation="horizontal"
     android:padding="10dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        app:riv_border_width="2px"
-        app:riv_border_color="#877ee0"
         android:id="@+id/book_img"
         android:layout_width="120dp"
         android:layout_height="160dp"
         android:src="@drawable/icon_cover_home02"
+        app:riv_border_color="#e0dede"
+        app:riv_border_width="0.5dp"
         app:riv_corner_radius="5dp" />
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_marginStart="6dp">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/book_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="#1e1e1e"
+            android:textSize="19sp" />
 
-            <TextView
-                android:layout_centerVertical="true"
-                android:id="@+id/book_name"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="--"
-                android:textColor="#1e1e1e"
-                android:textSize="17sp" />
+        <TextView
+            android:id="@+id/book_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="--"
+            android:textColor="#ff5a3f"
+            android:textSize="18sp" />
 
-            <TextView
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:id="@+id/book_grade"
-                android:textSize="18sp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/colorAccent"
-                android:text="--"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
 
         <TextView
             android:id="@+id/book_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/book_grade"
+            android:layout_marginTop="7dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="作者：--"
@@ -70,7 +63,8 @@
             android:id="@+id/book_update_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/book_author"
+            android:layout_marginTop="7dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="更新"
@@ -81,7 +75,8 @@
             android:id="@+id/book_fans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/book_update_info"
+            android:layout_marginTop="7dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="点击：--  人气： ---"
@@ -91,19 +86,20 @@
         <TextView
             android:id="@+id/book_start_read"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/book_fans"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_read_start"
             android:drawableLeft="@drawable/icon_btn_bg_read"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
             android:drawableStart="@drawable/icon_btn_bg_read"
-            android:paddingBottom="10dp"
+            android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingTop="10dp"
             android:text="开始阅读"
-            android:textColor="#695415" />
+            android:textColor="#695415"
+            android:textSize="13sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

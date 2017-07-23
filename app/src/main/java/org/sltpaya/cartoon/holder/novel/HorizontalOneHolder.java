@@ -1,7 +1,10 @@
 package org.sltpaya.cartoon.holder.novel;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.DataUtils;
 import org.sltpaya.cartoon.holder.BaseHolder;
+import org.sltpaya.cartoon.holder.LineView;
 import org.sltpaya.cartoon.net.cache.NovelCache;
 import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.cartoon.net.entry.novel.HorizontalOneEntry;
@@ -18,43 +22,41 @@ import org.sltpaya.tool.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
 /**
  * Author: SLTPAYA
  * Date: 2017/2/27
  */
 public class HorizontalOneHolder extends BaseHolder {
 
+    private int LINE_SIZE = 3;
     ImageView groupIcon;
     TextView groupTitle;
     TextView groupMore;
-
-    private ArrayList<View> mItems;
-    /**根布局标签，通过控制其显示和隐藏*/
-    ArrayList<View> mRootViews;
     private HorizontalOneEntry mEntry;
+    private List<LineView> mLines = new ArrayList<>(LINE_SIZE);//存储所有的行对象
 
     public HorizontalOneHolder(View itemView) {
         super(itemView);
-        mItems = new ArrayList<>();
+        LINE_SIZE = getLineSize();
         initViews();
         initGroupTitle();
     }
 
+    protected int getLineSize() {
+        return LINE_SIZE;
+    }
+
     protected void initViews() {
-        mRootViews = new ArrayList<>(3);
-        int[] parentIds = {
-                R.id.novel_group_1,
-                R.id.novel_group_2,
-                R.id.novel_group_3
-        };
-        for (int id : parentIds) {
-            View view = itemView.findViewById(id);
-            view.setVisibility(View.GONE);
-            mRootViews.add(view);
-            findGroupItem(view);
+        mLines.clear();//清空集合
+        for (int i = 0; i < LINE_SIZE; i++) {
+            LineView line = new HorizontalLine(itemView.getContext());
+            line.addItem(2);
+            mLines.add(line);
+            line.rootView.setVisibility(View.GONE);
+            ((ViewGroup) itemView).addView(line.rootView);
         }
+        //添加阴影
+        mInflater.inflate(R.layout.bottom_shadow, (ViewGroup) itemView, true);
     }
 
     /**
@@ -67,25 +69,12 @@ public class HorizontalOneHolder extends BaseHolder {
         groupMore.setText("更多");
     }
 
-    protected void findGroupItem(View view) {
-        int[] ids = {
-                R.id.novel_1,
-                R.id.novel_2
-        };
-        for (int id : ids) {
-            View inflate = view.findViewById(id);
-            mItems.add(inflate);
-        }
-    }
-
     @Override
     public void updateView() {
         NovelCache cache = NovelCache.getInstance();
         if (cache.getData() != null) {
             getEntry(cache.getData());
             List<HorizontalOneEntry.Datum> data = mEntry.getData().getData();
-            /*让根View显示出来*/
-            setVisibility(mRootViews, View.VISIBLE);
             setData(data);
             setGroup();
         }
@@ -135,31 +124,58 @@ public class HorizontalOneHolder extends BaseHolder {
     }
 
     private void setData(List<HorizontalOneEntry.Datum> data) {
-        for (int i = 0; i < mItems.size(); i++) {
-            handleView(mItems.get(i), data.get(i));
+        int position = 0;
+        for (LineView line : mLines) {
+            line.rootView.setVisibility(View.VISIBLE);
+            for (LineView.Item item : line.items) {
+                if (isShowDes()) {
+                    item.author.setVisibility(View.VISIBLE);
+                } else {
+                    item.author.setVisibility(View.GONE);
+                }
+                setDataToView(item, data.get(position));
+                position++;
+            }
         }
     }
 
-    private void handleView(View view, HorizontalOneEntry.Datum datum) {
-        ImageView img = (ImageView) view.findViewById(R.id.novel_item_img);
-        ImageView flagImg = (ImageView) view.findViewById(R.id.novel_item_flag);
-        TextView title = (TextView) view.findViewById(R.id.novel_item_title);
-        TextView des = (TextView) view.findViewById(R.id.novel_item_des);
-
+    private void setDataToView(LineView.Item item, HorizontalOneEntry.Datum datum) {
         String description = datum.getDescription();
         String imgUrl = datum.getThumb();
         String name = datum.getTitle();
         String gxType = datum.getGxType();
         int flagType = DataUtils.parseInt(gxType, 0);
 
-        setUpdateType(flagImg, flagType);
-        title.setText(name);
-        des.setText(description);
+        setUpdateType(item.flagImage, flagType);
+        item.title.setText(name);
+        item.author.setText(description);
 
         Picasso.with(itemView.getContext()).load(imgUrl)
                 .placeholder(R.drawable.icon_cover_home01)
                 .error(R.drawable.icon_cover_home01)
-                .into(img);
+                .config(Bitmap.Config.RGB_565)
+                .into(item.thumbImage);
+    }
+
+    protected boolean isShowDes() {
+        return true;
+    }
+
+    private class HorizontalLine extends LineView {
+
+        private HorizontalLine(Context context) {
+            super(context);
+        }
+
+        @Override
+        public LineView.Item newItem() {
+            View parent = mInflater.inflate(R.layout.novel_item_horizontal, rootView, false);
+            ImageView thumbImage = (ImageView) parent.findViewById(R.id.novel_item_img);
+            ImageView flagImage = (ImageView) parent.findViewById(R.id.novel_item_flag);
+            TextView title = (TextView) parent.findViewById(R.id.novel_item_title);
+            TextView des = (TextView) parent.findViewById(R.id.novel_item_des);
+            return new Item(parent, thumbImage, flagImage, title, des);
+        }
     }
 
 }

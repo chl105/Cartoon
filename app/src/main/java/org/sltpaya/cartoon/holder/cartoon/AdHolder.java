@@ -3,6 +3,7 @@ package org.sltpaya.cartoon.holder.cartoon;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import org.sltpaya.cartoon.R;
@@ -11,6 +12,7 @@ import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.AdEntry;
 import org.sltpaya.cartoon.net.entry.Entry;
 import org.sltpaya.tool.Utils;
+
 import java.util.List;
 
 import static org.sltpaya.cartoon.consts.Consts.RECOMMEND_AD_TYPE;
@@ -22,7 +24,7 @@ import static org.sltpaya.cartoon.consts.Consts.RECOMMEND_AD_TYPE;
 public class AdHolder extends BaseHolder {
 
     private AdEntry mEntry;
-    private ImageView imgView;
+    private ImageView mImageView;
     private TextView textView;
 
     public AdHolder(View itemView) {
@@ -31,7 +33,7 @@ public class AdHolder extends BaseHolder {
     }
 
     private void initViews() {
-        imgView = (ImageView) itemView.findViewById(R.id.ad_img);
+        mImageView = (ImageView) itemView.findViewById(R.id.ad_img);
         textView = (TextView) itemView.findViewById(R.id.ad_title);
     }
 
@@ -58,27 +60,36 @@ public class AdHolder extends BaseHolder {
         Picasso.with(itemView.getContext()).load(imgUrl)
                 .error(R.drawable.icon_cover_home01)
                 .placeholder(R.drawable.icon_cover_home01)
-                .into(imgView);
+                .into(mImageView);
     }
 
     /**
      * 根据布局的特点来决定是否显示广告位的上方标题
      * 并且动态的设置广告位大图的padding值
+     * 带标题的广告栏则含有动态修改广告图的高度为124dp
+     * 不带标题的广告栏动态修改高度为100dp
      */
     private void showTopTitle() {
         View view = itemView.findViewById(R.id.ad_top);
-        System.out.println("索引值为："+getAdapterPosition());
+        System.out.println("索引值为：" + getAdapterPosition());
+        LinearLayout.LayoutParams params
+                = (LinearLayout.LayoutParams) mImageView.getLayoutParams();
         if (getAdapterPosition() == 11) {
             view.setVisibility(View.GONE);
-            imgView.setPadding(0, Utils.dpToPx(15), 0, 0);
-        }else {
+            mImageView.setPadding(0, Utils.dpToPx(15), 0, 0);
+            params.height = Utils.dpToPx(124);
+            mImageView.setLayoutParams(params);
+        } else {
             view.setVisibility(View.VISIBLE);
-            imgView.setPadding(0, 0, 0, 0);
+            mImageView.setPadding(0, 0, 0, 0);
+            params.height = Utils.dpToPx(100);
+            mImageView.setLayoutParams(params);
         }
     }
 
     /**
      * 确定当前索引值对应的json中的条目为那个条目
+     *
      * @param data {@link AdEntry}
      * @return json条目中对应的position
      */

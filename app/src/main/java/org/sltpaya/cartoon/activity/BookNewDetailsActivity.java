@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextPaint;
 import android.util.SparseArray;
@@ -13,7 +12,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.DataUtils;
 import org.sltpaya.cartoon.fragment.detail.AuthorFragment;
@@ -41,26 +42,33 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     private TextView mBookName;
     private TextView mDes;
     private TextView mBookScore;
-
     private ImageView mBookImg;
     private ImageView mAdImage;
-
     private View mBack;
     private View buttonCollect;
     private View buttonShared;
     private View buttonMoney;
-
     private String mParamsBookid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_new_detail);
-        Bundle extras = getIntent().getExtras();
+        init(getIntent());
+    }
+
+    private void init(Intent intent) {
+        Bundle extras = intent.getExtras();
         mParamsBookid = extras.getString("bookid", "no");
         initViews();
         processNetEvent();
         setListenerEvent();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+//        init(intent);
     }
 
     private void initViews() {
@@ -152,7 +160,7 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
         String strUpdate = DataUtils.getBookFrequency(gxType) + "  " +
                 DataUtils.getUpdateFormatDate(updateTime);
         String strFans = "点击：" + hitNum + "   人气：" + bookViews;
-        System.out.println("更新时间："+updateTime+"处理过的："+strUpdate+"当前系统："+System.currentTimeMillis());
+        System.out.println("更新时间：" + updateTime + "处理过的：" + strUpdate + "当前系统：" + System.currentTimeMillis());
         System.out.println(strFans);
 
         TextPaint paint = mAuthor.getPaint();
@@ -221,8 +229,10 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
                     System.out.println("进入条漫Activity" + bookId);
                     entryStripManDetail(bookId);
                 } else {
+                    //注意：在漫画详情页中打开进入一个漫画详情页，则销毁当前详情页
                     System.out.println("进入漫画详情页了！" + bookId);
                     entryBookNewDetails(bookId);
+                    finish(false);
                 }
             }
         });
@@ -275,7 +285,6 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             this.finish();
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -293,9 +302,6 @@ public class BookNewDetailsActivity extends BaseActivity implements NetCache.Dat
         startActivity(intent);
     }
 
-    @Override
-    public void overridePendingTransition(int enterAnim, int exitAnim) {
-        super.overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-    }
+
 
 }

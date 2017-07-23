@@ -9,13 +9,6 @@
     <include android:id="@+id/vertical_1" layout="@layout/item_vertical_group" />
     <include android:id="@+id/vertical_2" layout="@layout/item_vertical_group" />
 
-    <View
-        android:background="@drawable/bottom_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"/>
-    <View
-        android:background="#f6f6f6"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+    <include layout="@layout/bottom_shadow" />
 
 </LinearLayout>

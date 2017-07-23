@@ -1,10 +1,13 @@
 package org.sltpaya.cartoon.fragment.main;
 
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import org.sltpaya.cartoon.R;
 
 /**

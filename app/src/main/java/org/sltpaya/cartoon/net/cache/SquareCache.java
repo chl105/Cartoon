@@ -76,24 +76,25 @@ public class SquareCache extends NetCache {
     @Override
     public void onResponse(String json, Map<String, String> params) {
         String action = params.get("a");
-        switch (action) {
-            case BANNER_TYPE:
-                BannerEntry bannerEntry = gson.fromJson(json, BannerEntry.class);
-                mEntrys.put(0, bannerEntry);
-                break;
-            case HOT_TYPE:
-                HotEntry entry = gson.fromJson(json, HotEntry.class);
-                mEntrys.put(1, entry);
-                break;
-            case FOLLOW_TYPE:
-                FollowerEntry fEntry = gson.fromJson(json, FollowerEntry.class);
-                mEntrys.put(2, fEntry);
-                break;
-            default:
-                NormalEntry normalEntry = gson.fromJson(json, NormalEntry.class);
-                mEntrys.put(3, normalEntry);
-        }
-        notifyData();
+//        switch (action) {
+//            case BANNER_TYPE:
+//                BannerEntry bannerEntry = gson.fromJson(json, BannerEntry.class);
+//                mEntrys.put(0, bannerEntry);
+//                break;
+//            case HOT_TYPE:
+//                System.out.println(json);
+//                HotEntry entry = gson.fromJson(json, HotEntry.class);
+//                mEntrys.put(1, entry);
+//                break;
+//            case FOLLOW_TYPE:
+//                FollowerEntry fEntry = gson.fromJson(json, FollowerEntry.class);
+//                mEntrys.put(2, fEntry);
+//                break;
+//            default:
+//                NormalEntry normalEntry = gson.fromJson(json, NormalEntry.class);
+//                mEntrys.put(3, normalEntry);
+//        }
+//        notifyData();
     }
 
     @Override

@@ -1,7 +1,10 @@
 package org.sltpaya.cartoon.holder.cartoon;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
@@ -10,6 +13,7 @@ import org.sltpaya.cartoon.BookState;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.adapter.DataUtils;
 import org.sltpaya.cartoon.holder.BaseHolder;
+import org.sltpaya.cartoon.holder.LineView;
 import org.sltpaya.cartoon.listener.AdapterItemListener;
 import org.sltpaya.cartoon.net.cache.RecommendCache;
 import org.sltpaya.cartoon.net.entry.Entry;
@@ -24,9 +28,6 @@ import java.util.List;
  */
 public class VerticalHolder extends BaseHolder implements View.OnClickListener{
 
-    private ArrayList<View> mItems;
-    /**根布局标签，通过控制其显示和隐藏*/
-    private ArrayList<View> mRootViews;
     private TextView mGroupTitle;
     private ImageView mGroupIcon;
     private TypeTwoEntry mEntry;
@@ -34,25 +35,26 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
     private TextView moreView;
     private int layoutType;
 
+    private final static int LINE_SIZE = 2;
+    private List<LineView> mLines = new ArrayList<>(LINE_SIZE);//存储所有的行对象
+
     public VerticalHolder(View itemView) {
         super(itemView);
         initViews();
     }
 
     private void initViews() {
-        mItems = new ArrayList<>();
-        mRootViews = new ArrayList<>(2);
         initGroupTitle();
-        int[] parentsId = {
-                R.id.vertical_1,
-                R.id.vertical_2
-        };
-        for (int id : parentsId) {
-            View view = itemView.findViewById(id);
-            view.setVisibility(View.GONE);
-            mRootViews.add(view);
-            inflateGroup(view);
+        mLines.clear();//清空集合
+        for (int i = 0; i < LINE_SIZE; i++) {
+            LineView line = new VerticalLine(itemView.getContext());
+            line.addItem(3);
+            mLines.add(line);
+            line.rootView.setVisibility(View.GONE);
+            ((ViewGroup) itemView).addView(line.rootView);
         }
+        //添加阴影
+        mInflater.inflate(R.layout.bottom_shadow, (ViewGroup) itemView, true);
     }
 
     @Override
@@ -68,19 +70,6 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
         mGroupIcon = (ImageView) itemView.findViewById(R.id.title_one_img);
     }
 
-    private void inflateGroup(View view) {
-        int[] parentsId = {
-                R.id.item_vertical_1,
-                R.id.item_vertical_2,
-                R.id.item_vertical_3
-        };
-        for (int id : parentsId) {
-            View child = view.findViewById(id);
-            mItems.add(child);
-        }
-    }
-
-
     @Override
     public void updateView() {
         setGroupTop();
@@ -88,7 +77,7 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
         SparseArray<Entry> cacheData = cache.getData();
         if (cacheData != null) {
             /*让根View显示出来*/
-            setVisibility(mRootViews, View.VISIBLE);
+//            setVisibility(mRootViews, View.VISIBLE);
             getEntry(cacheData);
             setData();
         }
@@ -103,30 +92,31 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
     private void setData() {
         layoutType = mEntry.getData().getType();
         List<TypeTwoEntry.Datum> data = mEntry.getData().getData();
-        for (int i = 0; i < mItems.size(); i++) {
-            handleView(mItems.get(i), data.get(i));
+        int position = 0;
+        for (LineView line : mLines) {
+            line.rootView.setVisibility(View.VISIBLE);
+            for (LineView.Item item : line.items) {
+                System.out.println("循环遍历zi");
+                setDataToView(item, data.get(position));
+                position++;
+            }
         }
     }
 
-    private void handleView(View parent, TypeTwoEntry.Datum data) {
-        ImageView img = (ImageView) parent.findViewById(R.id.item_vertical_img);
-        ImageView flagImg = (ImageView) parent.findViewById(R.id.item_vertical_flag);
-        TextView title = (TextView) parent.findViewById(R.id.item_vertical_title);
-        TextView author = (TextView) parent.findViewById(R.id.item_vertical_author);
-
+    private void setDataToView(LineView.Item item, TypeTwoEntry.Datum data) {
         String imgUrl = data.getThumb();
         String bookid = data.getBookid();
         String viewType = data.getViewType();
         String gxType = data.getGxType();
         int flagType = DataUtils.parseInt(gxType, 0);
 
-        setUpdateType(flagImg, flagType);
-        parent.setOnClickListener(this);//为主布局设置点击事件
+        setUpdateType(item.flagImage, flagType);
+        item.parent.setOnClickListener(this);//为主布局设置点击事件
         //传入信息；分别是activity打开的类型，书籍的id
         BookState state = new BookState(bookid);
         state.setShowViewType(viewType);
 
-        parent.setTag(-1, state);
+        item.parent.setTag(-1, state);
 
         //更多Activity布局，设置moreView的监听事件
         //0为标题名，1位类型（more),2为type的id
@@ -137,12 +127,15 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
         moreState.setGroupTitle(mGroupTitle.getText()+"");
         moreView.setTag(-1, moreState);
 
-        title.setText(data.getTitle());
-        author.setText(data.getAuthor());
-        Picasso.with(itemView.getContext()).load(imgUrl)
+        item.title.setText(data.getTitle());
+//        author.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        item.author.setText(data.getAuthor());
+        Picasso.with(itemView.getContext())
+                .load(imgUrl)
                 .placeholder(R.drawable.icon_cover_home02)
                 .error(R.drawable.icon_cover_home02)
-                .into(img);
+                .config(Bitmap.Config.RGB_565)
+                .into(item.thumbImage);
     }
 
     private void setGroupTop() {
@@ -178,4 +171,22 @@ public class VerticalHolder extends BaseHolder implements View.OnClickListener{
             listener.click(v, info);
         }
     }
+
+    private class VerticalLine extends LineView {
+
+        public VerticalLine(Context context) {
+            super(context);
+        }
+
+        @Override
+        public Item newItem() {
+            View parent = mInflater.inflate(R.layout.item_vertical, rootView, false);
+            ImageView thumbImage = (ImageView) parent.findViewById(R.id.item_vertical_img);
+            ImageView flagImage = (ImageView) parent.findViewById(R.id.item_vertical_flag);
+            TextView title = (TextView) parent.findViewById(R.id.item_vertical_title);
+            TextView author = (TextView) parent.findViewById(R.id.item_vertical_author);
+            return new Item(parent, thumbImage, flagImage, title, author);
+        }
+    }
+
 }

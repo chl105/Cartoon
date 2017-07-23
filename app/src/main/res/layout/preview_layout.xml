@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <!--android:layout_height="180dp"-->
-    <include layout="@layout/item_title_one"/>
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <!--<Space-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp" />-->
+    <include layout="@layout/item_title_one" />
+
+    <include
+        android:id="@+id/cartoon_scroll_head"
+        layout="@layout/cartoon_scroll_head" />
+
     <View
-        android:background="#f6f6f6"
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+        android:layout_height="8dp"
+        android:background="#f6f6f6" />
 
 </LinearLayout>

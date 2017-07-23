@@ -26,14 +26,9 @@ public class StripManDetailActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             this.finish();
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void overridePendingTransition(int enterAnim, int exitAnim) {
-        super.overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-    }
 }

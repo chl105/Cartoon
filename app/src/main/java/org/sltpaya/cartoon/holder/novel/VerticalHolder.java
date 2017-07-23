@@ -1,5 +1,6 @@
 package org.sltpaya.cartoon.holder.novel;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -134,6 +135,7 @@ public class VerticalHolder extends BaseHolder {
         Picasso.with(itemView.getContext()).load(imgUrl)
                 .placeholder(R.drawable.icon_cover_home01)
                 .error(R.drawable.icon_cover_home01)
+                .config(Bitmap.Config.RGB_565)
                 .into(img);
     }
 

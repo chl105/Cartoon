@@ -3,14 +3,13 @@ package org.sltpaya.cartoon.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import org.sltpaya.tool.Utils;
 
 /**
  * Author: SLTPAYA
  * Date: 2017/4/1
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AnimationActivity {
 
     private Utils.ToolApplication application;
     private Activity activity;

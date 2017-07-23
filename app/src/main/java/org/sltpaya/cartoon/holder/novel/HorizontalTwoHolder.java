@@ -5,8 +5,6 @@ import android.view.View;
 import org.sltpaya.cartoon.R;
 import org.sltpaya.tool.Toast;
 
-import java.util.ArrayList;
-
 /**
  * Author: SLTPAYA
  * Date: 2017/2/27
@@ -18,18 +16,13 @@ public class HorizontalTwoHolder extends HorizontalOneHolder {
     }
 
     @Override
-    protected void initViews() {
-        mRootViews = new ArrayList<>(2);
-        int[] parentIds = {
-                R.id.novel_group_1,
-                R.id.novel_group_2
-        };
-        for (int id : parentIds) {
-            View view = itemView.findViewById(id);
-            view.setVisibility(View.GONE);
-            mRootViews.add(view);
-            findGroupItem(view);
-        }
+    protected int getLineSize() {
+        return 2;
+    }
+
+    @Override
+    protected boolean isShowDes() {
+        return false;
     }
 
     @Override

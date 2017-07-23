@@ -22,13 +22,15 @@
         </activity>
         <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.StripManDetailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.BookNewDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BookNewDetailsActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.CartoonRankActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.BookMoreActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.ClassifyActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.NovelRankActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.NovelDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.RednecksRankActivity" android:screenOrientation="portrait"/>
+
+        <service android:name=".service.RemoteService" android:process="org.sltpaya.cartoon.remote"/>
     </application>
 
 </manifest>

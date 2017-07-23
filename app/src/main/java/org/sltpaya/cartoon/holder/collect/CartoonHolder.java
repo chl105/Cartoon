@@ -30,6 +30,9 @@ public class CartoonHolder extends BaseHolder {
     private View mCollect;
     private LinearLayout mSet;
 
+    private int mTotalWidth;
+    private int mContainerWidth;
+
     public CartoonHolder(View itemView) {
         super(itemView);
         initViews();
@@ -42,6 +45,8 @@ public class CartoonHolder extends BaseHolder {
         mViewCount = (TextView) itemView.findViewById(R.id.collect_item_count);
         mCollect = itemView.findViewById(R.id.collect_item_collect);
         mSet = (LinearLayout) itemView.findViewById(R.id.collect_item_set);
+        mTotalWidth = 0;
+        mContainerWidth = mSet.getWidth();
     }
 
     public void updateView(CartoonEntry entry) {
@@ -70,6 +75,14 @@ public class CartoonHolder extends BaseHolder {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
             params.rightMargin = 10;
             view.setLayoutParams(params);
+        }
+        //遍历所有的内容view，获取总宽度
+        for (int i = 0; i < mSet.getChildCount(); i++) {
+            View view = mSet.getChildAt(i);
+            mTotalWidth += view.getMeasuredWidth();
+            if (mTotalWidth > mContainerWidth) {
+                mSet.removeView(view);
+            }
         }
 
         mTitle.setText(title);

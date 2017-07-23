@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <!--详情页Bar-->
     <include layout="@layout/book_item_bar" />
@@ -25,15 +23,23 @@
             <!--收藏，分享，打赏-->
             <include layout="@layout/book_item_option" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#f6f6f6" />
+
             <!--小说简介-->
             <TextView
                 android:id="@+id/book_des"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:paddingEnd="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="20dp"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+                android:textColor="#5c5c5c"
+                android:textSize="13.5sp" />
 
             <!--章节列表-->
             <FrameLayout
@@ -44,9 +50,11 @@
                     android:layout_width="340dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:background="#f5f5f5"
+                    android:background="@drawable/bg_more_chapter"
                     android:gravity="center"
-                    android:text="查看更多章节" />
+                    android:text="查看更多章节"
+                    android:textColor="#48421e"
+                    android:textSize="14sp" />
 
             </FrameLayout>
 
@@ -59,13 +67,15 @@
             <include layout="@layout/book_detail_tag" />
 
             <!--粉丝团贡献榜 可滚动的用户评论实时动态-->
-            <include layout="@layout/book_detail_fans"/>
+            <include layout="@layout/book_detail_fans" />
 
             <!--广告组，这是下方的一个广告位图-->
             <include layout="@layout/book_detail_ad" />
 
             <!--同类信息：下方推荐的其他作品信息-->
-            <include android:id="@+id/book_same" layout="@layout/book_item_same" />
+            <include
+                android:id="@+id/book_same"
+                layout="@layout/book_item_same" />
 
         </LinearLayout>
 

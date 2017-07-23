@@ -15,7 +15,7 @@ public class HorizontalTwoState extends BaseState {
     public void work(HolderManger manger) {
         super.work(manger);
         if (mType == HORIZONTAL_FOUR_TYPE) {
-            View infalte = infalte(R.layout.novel_group_two);
+            View infalte = infalte(R.layout.cartoon_group);
             HorizontalTwoHolder holder = new HorizontalTwoHolder(infalte);
             manger.setHolder(holder);
             return;

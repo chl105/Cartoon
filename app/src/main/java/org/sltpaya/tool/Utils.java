@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2012-2016 Arne Schwabe
- * Distributed under the GNU GPL v2 with additional terms. For full terms see the file doc/LICENSE.txt
- */
 
 package org.sltpaya.tool;
 
@@ -42,6 +38,9 @@ import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * SLTPAYA TOOL工具类
+ */
 public class Utils {
 
     private static float density = 0;

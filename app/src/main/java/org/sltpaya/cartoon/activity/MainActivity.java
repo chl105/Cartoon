@@ -1,10 +1,11 @@
 package org.sltpaya.cartoon.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+
 import org.sltpaya.cartoon.R;
 import org.sltpaya.cartoon.fragment.main.CartoonFragment;
 import org.sltpaya.cartoon.fragment.main.CollectFragment;
 import org.sltpaya.cartoon.fragment.main.MineFragment;
 import org.sltpaya.cartoon.fragment.main.NovelFragment;
 import org.sltpaya.cartoon.fragment.main.SquareFragment;
+import org.sltpaya.cartoon.service.RemoteService;
 import org.sltpaya.cartoon.view.ExitDialog;
 import org.sltpaya.tablayout.XTabLayout;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        startService(new Intent(this, RemoteService.class));
     }
 
     private void init() {
@@ -173,4 +178,20 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void finish() {
+        super.finish(false);
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    System.out.println("我已经结束了进程了！");
+                    Process.killProcess(Process.myPid());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.run();
+    }
 }
